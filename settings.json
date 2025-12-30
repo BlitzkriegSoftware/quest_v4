@@ -1,16 +1,16 @@
 {
-  "rows": 40,
-  "cols": 120,
-  "maxLevel": 20,
-  "maps": "/maps/",
+  "mapRows": 40,
+  "mapCols": 120,
+  "mapMinLevel": 1,
+  "mapMaxLevel": 20,
+  "mapsFolder": "/maps/",
   "objectKinds": [
-    { "impassable": 0 },
-    { "floor": 1 },
-    { "trap": 2 },
-    { "stair": 3 },
-    { "n/a": 4 },
-    { "object": 5 },
-    { "[a-z]?": 6, "note": "monsters" }
+    { "impassable": 0, "note": "" },
+    { "floor": 1, "note": "" },
+    { "trap": 2, "note": "render floor until boom" },
+    { "stair": 3, "note": "special rules on floor min/max" },
+    { "object": 4, "note": "pickupable objects" },
+    { "[a-z]?": 9, "note": "monsters" }
   ],
   "objects": [
     { "horizontal": "\u2501", "kind": 0 },
@@ -24,24 +24,18 @@
     { "horizontal-down": "\u2533", "kind": 0 },
     { "horizontal-up": "\u253b", "kind": 0 },
     { "cross": "\u254b", "kind": 0 },
-    { "trap": "\u1FAA4", "kind": 2 },
     { "water": "\u1f4a7", "kind": 0 },
-    { "stair": "\u2261", "kind": 3 },
-    { "potion": "\u1F376", "kind": 5 },
-    { "gold": "\u1f71b", "kind": 5 },
-    { "scroll": "\u1F4Dc", "kind": 5 },
     { "floor": "\u2591", "kind": 1 },
-    { "": "", "kind": 0 },
-    { "": "", "kind": 0 },
-    { "": "", "kind": 0 },
-    { "": "", "kind": 0 },
-    { "": "", "kind": 0 },
-    { "": "", "kind": 0 },
-    { "": "", "kind": 0 },
-    { "": "", "kind": 0 }
+    { "trap": "\u1FAA4", "kind": 2 },
+    { "stair": "\u2261", "kind": 3 },
+    { "potion": "\u1F376", "kind": 4 },
+    { "scroll": "\u1F4Dc", "kind": 4 },
+    { "gold": "\u1f71b", "kind": 4 }
   ],
   "scrolls": [
-    { "majik-map": { "effect": "map", "impact": 0, "radius": 9 } },
+    { "candle": { "effect": "map", "impact": 30, "radius": 3 } },
+    { "torch": { "effect": "map", "impact": 10, "radius": 7 } },
+    { "majik-map": { "effect": "map", "impact": 500, "radius": 100 } },
     { "heal": { "effect": "heal", "impact": 25, "radius": 0 } },
     { "heal-all": { "effect": "heal", "impact": 100, "radius": 0 } },
     { "mana": { "effect": "mana", "impact": 25, "radius": 0 } },
@@ -50,7 +44,7 @@
     { "find-monster": { "effect": "monster", "impact": 0, "radius": 6 } },
     { "find-majik": { "effect": "majik", "impact": 0, "radius": 4 } },
     { "find-trap": { "effect": "trap", "impact": 0, "radius": 6 } },
-    { "find-stair": { "effect": "stair", "impact": 0, "radius": 10 } },
+    { "find-stair": { "effect": "stair", "impact": 0, "radius": 100 } },
     { "arrow": { "effect": "damage", "impact": 5, "radius": 5 } },
     { "bomb": { "effect": "damage", "impact": 10, "radius": 2 } },
     { "fireball": { "effect": "damage", "impact": 20, "radius": 1 } },
@@ -60,11 +54,12 @@
     { "teleport": { "effect": "teleport", "impact": 0, "radius": 10 } }
   ],
   "potions": [
-    { "heal": { "effect": "heal", "impact": 10 } },
-    { "mana": { "effect:": "mana", "impact": 10 } },
-    { "shield": { "effect:": "shield", "impact": 20 } },
-    { "vigor": { "effect:": "vigor", "impact": 15 } },
-    { "iq": { "effect:": "iq", "impact": 5 } }
+    { "heal": { "effect": "heal", "impact": 10, "radius": 0 } },
+    { "mana": { "effect:": "mana", "impact": 10, "radius": 0 } },
+    { "shield": { "effect:": "shield", "impact": 20, "radius": 0 } },
+    { "vigor": { "effect:": "vigor", "impact": 15, "radius": 0 } },
+    { "iq": { "effect:": "iq", "impact": 5, "radius": 0 } },
+    { "vision": { "effect": "map", "impact": 0, "radius": 5 } }
   ],
   "monsters": [
     {
