@@ -1,0 +1,380 @@
+{
+  "rows": 40,
+  "cols": 120,
+  "maxLevel": 20,
+  "maps": "/maps/",
+  "objectKinds": [
+    { "impassable": 0 },
+    { "floor": 1 },
+    { "trap": 2 },
+    { "stair": 3 },
+    { "n/a": 4 },
+    { "object": 5 },
+    { "[a-z]?": 6, "note": "monsters" }
+  ],
+  "objects": [
+    { "horizontal": "\u2501", "kind": 0 },
+    { "vertical": "\u2503", "kind": 0 },
+    { "down-right": "\u250f", "kind": 0 },
+    { "down-left": "\u2513", "kind": 0 },
+    { "up-left": "\u251b", "kind": 0 },
+    { "up-right": "\u2517", "kind": 0 },
+    { "vertical-left": "\u252b", "kind": 0 },
+    { "vertical-right": "\u2523", "kind": 0 },
+    { "horizontal-down": "\u2533", "kind": 0 },
+    { "horizontal-up": "\u253b", "kind": 0 },
+    { "cross": "\u254b", "kind": 0 },
+    { "trap": "\u1FAA4", "kind": 2 },
+    { "water": "\u1f4a7", "kind": 0 },
+    { "stair": "\u2261", "kind": 3 },
+    { "potion": "\u1F376", "kind": 5 },
+    { "gold": "\u1f71b", "kind": 5 },
+    { "scroll": "\u1F4Dc", "kind": 5 },
+    { "floor": "\u2591", "kind": 1 },
+    { "": "", "kind": 0 },
+    { "": "", "kind": 0 },
+    { "": "", "kind": 0 },
+    { "": "", "kind": 0 },
+    { "": "", "kind": 0 },
+    { "": "", "kind": 0 },
+    { "": "", "kind": 0 },
+    { "": "", "kind": 0 }
+  ],
+  "scrolls": [
+    { "majik-map": { "effect": "map", "impact": 0, "radius": 9 } },
+    { "heal": { "effect": "heal", "impact": 25, "radius": 0 } },
+    { "heal-all": { "effect": "heal", "impact": 100, "radius": 0 } },
+    { "mana": { "effect": "mana", "impact": 25, "radius": 0 } },
+    { "mana-all": { "effect": "mana", "impact": 100, "radius": 0 } },
+    { "find-gold": { "effect": "gold", "impact": 0, "radius": 3 } },
+    { "find-monster": { "effect": "monster", "impact": 0, "radius": 6 } },
+    { "find-majik": { "effect": "majik", "impact": 0, "radius": 4 } },
+    { "find-trap": { "effect": "trap", "impact": 0, "radius": 6 } },
+    { "find-stair": { "effect": "stair", "impact": 0, "radius": 10 } },
+    { "arrow": { "effect": "damage", "impact": 5, "radius": 5 } },
+    { "bomb": { "effect": "damage", "impact": 10, "radius": 2 } },
+    { "fireball": { "effect": "damage", "impact": 20, "radius": 1 } },
+    { "zap": { "effect": "damage", "impact": 30, "radius": 1 } },
+    { "big-zap": { "effect": "damage", "impact": 30, "radius": 2 } },
+    { "nuke": { "effect": "damage", "impact": 50, "radius": 3 } },
+    { "teleport": { "effect": "teleport", "impact": 0, "radius": 10 } }
+  ],
+  "potions": [
+    { "heal": { "effect": "heal", "impact": 10 } },
+    { "mana": { "effect:": "mana", "impact": 10 } },
+    { "shield": { "effect:": "shield", "impact": 20 } },
+    { "vigor": { "effect:": "vigor", "impact": 15 } },
+    { "iq": { "effect:": "iq", "impact": 5 } }
+  ],
+  "monsters": [
+    {
+      "symbol": "a",
+      "name": "ant",
+      "minLevel": 1,
+      "maxLevel": 5,
+      "attack": "1d4",
+      "defense": 5,
+      "movement": 1,
+      "hits": 10,
+      "special": "p"
+    },
+    {
+      "symbol": "b",
+      "name": "bear",
+      "minLevel": 1,
+      "maxLevel": 5,
+      "attack": "1d10+2",
+      "defense": 9,
+      "movement": 1,
+      "hits": 20,
+      "special": ""
+    },
+    {
+      "symbol": "c",
+      "name": "cat",
+      "minLevel": 1,
+      "maxLevel": 5,
+      "attack": "1d8",
+      "defense": 6,
+      "movement": 1,
+      "hits": 12,
+      "special": ""
+    },
+    {
+      "symbol": "d",
+      "name": "dragon",
+      "minLevel": 11,
+      "maxLevel": 20,
+      "attack": "4d10+3",
+      "defense": 40,
+      "movement": 2,
+      "hits": 60,
+      "special": "f"
+    },
+    {
+      "symbol": "e",
+      "name": "eagle",
+      "minLevel": 2,
+      "maxLevel": 8,
+      "attack": "1d4",
+      "defense": 6,
+      "movement": 3,
+      "hits": 8,
+      "special": ""
+    },
+    {
+      "symbol": "f",
+      "name": "fenrir",
+      "minLevel": 3,
+      "maxLevel": 12,
+      "attack": "3d8",
+      "defense": 16,
+      "movement": 2,
+      "hits": 20,
+      "special": ""
+    },
+    {
+      "symbol": "g",
+      "name": "golblin",
+      "minLevel": 1,
+      "maxLevel": 12,
+      "attack": "2d4+2",
+      "defense": 10,
+      "movement": 1,
+      "hits": 10,
+      "special": ""
+    },
+    {
+      "symbol": "h",
+      "name": "harpy",
+      "minLevel": 4,
+      "maxLevel": 14,
+      "attack": "3d6+4",
+      "defense": 20,
+      "movement": 1,
+      "hits": 20,
+      "special": "p"
+    },
+    {
+      "symbol": "i",
+      "name": "ifrit",
+      "minLevel": 9,
+      "maxLevel": 18,
+      "attack": "3d6+4",
+      "defense": 20,
+      "movement": 1,
+      "hits": 20,
+      "special": "p"
+    },
+    {
+      "symbol": "j",
+      "name": "jiangshi",
+      "minLevel": 6,
+      "maxLevel": 16,
+      "attack": "1d6+1",
+      "defense": 12,
+      "movement": 1,
+      "hits": 15,
+      "special": ""
+    },
+    {
+      "symbol": "k",
+      "name": "kobold",
+      "minLevel": 1,
+      "maxLevel": 16,
+      "attack": "1d8",
+      "defense": 10,
+      "movement": 1,
+      "hits": 10,
+      "special": ""
+    },
+    {
+      "symbol": "l",
+      "name": "lynx",
+      "minLevel": 1,
+      "maxLevel": 13,
+      "attack": "1d6",
+      "defense": 8,
+      "movement": 1,
+      "hits": 18,
+      "special": ""
+    },
+    {
+      "symbol": "m",
+      "name": "mold",
+      "minLevel": 2,
+      "maxLevel": 16,
+      "attack": "1d4",
+      "defense": 8,
+      "movement": 1,
+      "hits": 30,
+      "special": "a"
+    },
+    {
+      "symbol": "n",
+      "name": "nian",
+      "minLevel": 1,
+      "maxLevel": 12,
+      "attack": "1d6",
+      "defense": 5,
+      "movement": 1,
+      "hits": 8,
+      "special": ""
+    },
+    {
+      "symbol": "o",
+      "name": "ogre",
+      "minLevel": 4,
+      "maxLevel": 16,
+      "attack": "3d6",
+      "defense": 16,
+      "movement": 1,
+      "hits": 30,
+      "special": ""
+    },
+    {
+      "symbol": "p",
+      "name": "python",
+      "minLevel": 1,
+      "maxLevel": 14,
+      "attack": "1d6",
+      "defense": 10,
+      "movement": 1,
+      "hits": 22,
+      "special": "p"
+    },
+    {
+      "symbol": "q",
+      "name": "qilin",
+      "minLevel": 6,
+      "maxLevel": 16,
+      "attack": "1d6",
+      "defense": 18,
+      "movement": 1,
+      "hits": 28,
+      "special": "a"
+    },
+    {
+      "symbol": "r",
+      "name": "rat",
+      "minLevel": 1,
+      "maxLevel": 10,
+      "attack": "1d4",
+      "defense": 4,
+      "movement": 1,
+      "hits": 8,
+      "special": ""
+    },
+    {
+      "symbol": "s",
+      "name": "shade",
+      "minLevel": 10,
+      "maxLevel": 20,
+      "attack": "3d10",
+      "defense": 8,
+      "movement": 3,
+      "hits": 18,
+      "special": ""
+    },
+    {
+      "symbol": "t",
+      "name": "tiger",
+      "minLevel": 6,
+      "maxLevel": 18,
+      "attack": "4d6",
+      "defense": 12,
+      "movement": 1,
+      "hits": 20,
+      "special": ""
+    },
+    {
+      "symbol": "u",
+      "name": "unicorn",
+      "minLevel": 16,
+      "maxLevel": 20,
+      "attack": "3d6",
+      "defense": 6,
+      "movement": 2,
+      "hits": 30,
+      "special": ""
+    },
+    {
+      "symbol": "v",
+      "name": "vampyre",
+      "minLevel": 17,
+      "maxLevel": 20,
+      "attack": "5d10",
+      "defense": 40,
+      "movement": 2,
+      "hits": 40,
+      "special": "f"
+    },
+    {
+      "symbol": "w",
+      "name": "witch",
+      "minLevel": 11,
+      "maxLevel": 20,
+      "attack": "2d6",
+      "defense": 8,
+      "movement": 1,
+      "hits": 26,
+      "special": "m"
+    },
+    {
+      "symbol": "x",
+      "name": "xanthus",
+      "minLevel": 8,
+      "maxLevel": 16,
+      "attack": "3d6",
+      "defense": 14,
+      "movement": 2,
+      "hits": 22,
+      "special": ""
+    },
+    {
+      "symbol": "y",
+      "name": "yeti",
+      "minLevel": 13,
+      "maxLevel": 20,
+      "attack": "3d8",
+      "defense": 20,
+      "movement": 1,
+      "hits": 30,
+      "special": ""
+    },
+    {
+      "symbol": "z",
+      "name": "zunbera-bō",
+      "minLevel": 8,
+      "maxLevel": 18,
+      "attack": "2d6",
+      "defense": 16,
+      "movement": 3,
+      "hits": 14,
+      "special": "f"
+    }
+  ],
+  "stats": [
+    {
+      "iq": {
+        "name": "Inteligence",
+        "min": 1,
+        "max": 9
+      }
+    },
+    {
+      "st": {
+        "name": "Strength",
+        "min": 1,
+        "max": 9
+      }
+    },
+    {
+      "en": {
+        "name": "Endurance",
+        "min": 1,
+        "max": 9
+      }
+    }
+  ]
+}
