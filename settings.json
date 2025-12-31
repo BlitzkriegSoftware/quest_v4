@@ -1,17 +1,19 @@
 {
-  "mapRows": 40,
-  "mapCols": 120,
-  "mapMinLevel": 1,
-  "mapMaxLevel": 20,
-  "mapsFolder": "/maps/",
-  "mapsFileExt": ".map",
+  "mapInfo": {
+    "mapRows": 40,
+    "mapCols": 120,
+    "mapMinLevel": 1,
+    "mapMaxLevel": 20,
+    "mapsFolder": "/maps/",
+    "mapsFileExt": ".map"
+  },
   "objectKinds": [
-    { "impassable": 0, "note": "" },
-    { "floor": 1, "note": "" },
-    { "trap": 2, "note": "render floor until boom" },
-    { "stair": 3, "note": "special rules on floor min/max" },
-    { "object": 4, "note": "pickupable objects" },
-    { "[a-z]?": 9, "note": "monsters" }
+    { "impassable": 0, "note": "", "kind": 0 },
+    { "floor": 1, "note": "", "kind": 0 },
+    { "trap": 2, "note": "render floor until boom", "kind": 2 },
+    { "stair": 3, "note": "special rules on floor min/max", "kind": 3 },
+    { "object": 4, "note": "pickupable objects", "kind": 4 },
+    { "[a-z]?": 9, "note": "monsters", "kind": 999 }
   ],
   "objects": [
     { "horizontal": "\u2501", "kind": 0 },
@@ -31,7 +33,8 @@
     { "stair": "\u2261", "kind": 3 },
     { "potion": "\u1F376", "kind": 4 },
     { "scroll": "\u1F4Dc", "kind": 4 },
-    { "gold": "\u1f71b", "kind": 4 }
+    { "gold": "\u1f71b", "kind": 4 },
+    { "jewel": "\u1F48e", "kind": 4 }
   ],
   "scrolls": [
     { "candle": { "effect": "map", "impact": 30, "radius": 3 } },
