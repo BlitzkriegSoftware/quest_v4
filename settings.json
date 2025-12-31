@@ -1,69 +1,300 @@
 {
   "mapInfo": {
-    "mapRows": 40,
-    "mapCols": 120,
-    "mapMinLevel": 1,
-    "mapMaxLevel": 20,
-    "mapsFolder": "/maps/",
-    "mapsFileExt": ".map"
+    "Rows": 40,
+    "Cols": 120,
+    "MinLevel": 1,
+    "MaxLevel": 20,
+    "Folder": "/maps/",
+    "FileExt": ".map"
   },
-  "objectKinds": [
-    { "impassable": 0, "note": "", "kind": 0 },
-    { "floor": 1, "note": "", "kind": 0 },
-    { "trap": 2, "note": "render floor until boom", "kind": 2 },
-    { "stair": 3, "note": "special rules on floor min/max", "kind": 3 },
-    { "object": 4, "note": "pickupable objects", "kind": 4 },
-    { "[a-z]?": 9, "note": "monsters", "kind": 999 }
+  "thingKinds": [
+    {
+      "name": "impassable",
+      "value": 0,
+      "note": "",
+      "kind": 0
+    },
+    {
+      "name": "floor",
+      "value": 1,
+      "note": "",
+      "kind": 0
+    },
+    {
+      "name": "trap",
+      "value": 2,
+      "note": "render floor until boom",
+      "kind": 2
+    },
+    {
+      "name": "stair",
+      "value": 3,
+      "note": "special rules on floor min/max",
+      "kind": 3
+    },
+    {
+      "name": "thing",
+      "value": 4,
+      "note": "pickupable things",
+      "kind": 4
+    },
+    {
+      "name": "[a-z]?",
+      "value": 9,
+      "note": "monsters",
+      "kind": 999
+    }
   ],
-  "objects": [
-    { "horizontal": "\u2501", "kind": 0 },
-    { "vertical": "\u2503", "kind": 0 },
-    { "down-right": "\u250f", "kind": 0 },
-    { "down-left": "\u2513", "kind": 0 },
-    { "up-left": "\u251b", "kind": 0 },
-    { "up-right": "\u2517", "kind": 0 },
-    { "vertical-left": "\u252b", "kind": 0 },
-    { "vertical-right": "\u2523", "kind": 0 },
-    { "horizontal-down": "\u2533", "kind": 0 },
-    { "horizontal-up": "\u253b", "kind": 0 },
-    { "cross": "\u254b", "kind": 0 },
-    { "water": "\u1f4a7", "kind": 0 },
-    { "floor": "\u2591", "kind": 1 },
-    { "trap": "\u1FAA4", "kind": 2 },
-    { "stair": "\u2261", "kind": 3 },
-    { "potion": "\u1F376", "kind": 4 },
-    { "scroll": "\u1F4Dc", "kind": 4 },
-    { "gold": "\u1f71b", "kind": 4 },
-    { "jewel": "\u1F48e", "kind": 4 }
+  "things": [
+    {
+      "name": "horizontal",
+      "unicode": "\u2501",
+      "kind": 0
+    },
+    {
+      "name": "vertical",
+      "unicode": "\u2503",
+      "kind": 0
+    },
+    {
+      "name": "down-right",
+      "unicode": "\u250f",
+      "kind": 0
+    },
+    {
+      "name": "down-left",
+      "unicode": "\u2513",
+      "kind": 0
+    },
+    {
+      "name": "up-left",
+      "unicode": "\u251b",
+      "kind": 0
+    },
+    {
+      "name": "up-right",
+      "unicode": "\u2517",
+      "kind": 0
+    },
+    {
+      "name": "vertical-left",
+      "unicode": "\u252b",
+      "kind": 0
+    },
+    {
+      "name": "vertical-right",
+      "unicode": "\u2523",
+      "kind": 0
+    },
+    {
+      "name": "horizontal-down",
+      "unicode": "\u2533",
+      "kind": 0
+    },
+    {
+      "name": "horizontal-up",
+      "unicode": "\u253b",
+      "kind": 0
+    },
+    {
+      "name": "cross",
+      "unicode": "\u254b",
+      "kind": 0
+    },
+    {
+      "name": "water",
+      "unicode": "\u1f4a7",
+      "kind": 0
+    },
+    {
+      "name": "floor",
+      "unicode": "\u2591",
+      "kind": 1
+    },
+    {
+      "name": "trap",
+      "unicode": "\u1FAA4",
+      "kind": 2
+    },
+    {
+      "name": "stair",
+      "unicode": "\u2261",
+      "kind": 3
+    },
+    {
+      "name": "potion",
+      "unicode": "\u1F376",
+      "kind": 4
+    },
+    {
+      "name": "scroll",
+      "unicode": "\u1F4Dc",
+      "kind": 4
+    },
+    {
+      "name": "gold",
+      "unicode": "\u1f71b",
+      "kind": 4
+    },
+    {
+      "name": "jewel",
+      "unicode": "\u1F48e",
+      "kind": 4
+    }
   ],
   "scrolls": [
-    { "candle": { "effect": "map", "impact": 30, "radius": 3 } },
-    { "torch": { "effect": "map", "impact": 10, "radius": 7 } },
-    { "majik-map": { "effect": "map", "impact": 500, "radius": 100 } },
-    { "heal": { "effect": "heal", "impact": 25, "radius": 0 } },
-    { "heal-all": { "effect": "heal", "impact": 100, "radius": 0 } },
-    { "mana": { "effect": "mana", "impact": 25, "radius": 0 } },
-    { "mana-all": { "effect": "mana", "impact": 100, "radius": 0 } },
-    { "find-gold": { "effect": "gold", "impact": 0, "radius": 3 } },
-    { "find-monster": { "effect": "monster", "impact": 0, "radius": 6 } },
-    { "find-majik": { "effect": "majik", "impact": 0, "radius": 4 } },
-    { "find-trap": { "effect": "trap", "impact": 0, "radius": 6 } },
-    { "find-stair": { "effect": "stair", "impact": 0, "radius": 100 } },
-    { "arrow": { "effect": "damage", "impact": 5, "radius": 5 } },
-    { "bomb": { "effect": "damage", "impact": 10, "radius": 2 } },
-    { "fireball": { "effect": "damage", "impact": 20, "radius": 1 } },
-    { "zap": { "effect": "damage", "impact": 30, "radius": 1 } },
-    { "big-zap": { "effect": "damage", "impact": 30, "radius": 2 } },
-    { "nuke": { "effect": "damage", "impact": 50, "radius": 3 } },
-    { "teleport": { "effect": "teleport", "impact": 0, "radius": 10 } }
+    {
+      "name": "candle",
+      "effect": "map",
+      "impact": 30,
+      "radius": 3
+    },
+    {
+      "name": "torch",
+      "effect": "map",
+      "impact": 10,
+      "radius": 7
+    },
+    {
+      "name": "majik-map",
+      "effect": "map",
+      "impact": 500,
+      "radius": 100
+    },
+    {
+      "name": "heal",
+      "effect": "heal",
+      "impact": 25,
+      "radius": 0
+    },
+    {
+      "name": "heal-all",
+      "effect": "heal",
+      "impact": 100,
+      "radius": 0
+    },
+    {
+      "name": "mana",
+      "effect": "mana",
+      "impact": 25,
+      "radius": 0
+    },
+    {
+      "name": "mana-all",
+      "effect": "mana",
+      "impact": 100,
+      "radius": 0
+    },
+    {
+      "name": "find-gold",
+      "effect": "gold",
+      "impact": 0,
+      "radius": 3
+    },
+    {
+      "name": "find-monster",
+      "effect": "monster",
+      "impact": 0,
+      "radius": 6
+    },
+    {
+      "name": "find-majik",
+      "effect": "majik",
+      "impact": 0,
+      "radius": 4
+    },
+    {
+      "name": "find-trap",
+      "effect": "trap",
+      "impact": 0,
+      "radius": 6
+    },
+    {
+      "name": "find-stair",
+      "effect": "stair",
+      "impact": 0,
+      "radius": 100
+    },
+    {
+      "name": "arrow",
+      "effect": "damage",
+      "impact": 5,
+      "radius": 5
+    },
+    {
+      "name": "bomb",
+      "effect": "damage",
+      "impact": 10,
+      "radius": 2
+    },
+    {
+      "name": "fireball",
+      "effect": "damage",
+      "impact": 20,
+      "radius": 1
+    },
+    {
+      "name": "zap",
+      "effect": "damage",
+      "impact": 30,
+      "radius": 1
+    },
+    {
+      "name": "big-zap",
+      "effect": "damage",
+      "impact": 30,
+      "radius": 2
+    },
+    {
+      "name": "nuke",
+      "effect": "damage",
+      "impact": 50,
+      "radius": 3
+    },
+    {
+      "name": "teleport",
+      "effect": "teleport",
+      "impact": 0,
+      "radius": 10
+    }
   ],
   "potions": [
-    { "heal": { "effect": "heal", "impact": 10, "radius": 0 } },
-    { "mana": { "effect:": "mana", "impact": 10, "radius": 0 } },
-    { "shield": { "effect:": "shield", "impact": 20, "radius": 0 } },
-    { "vigor": { "effect:": "vigor", "impact": 15, "radius": 0 } },
-    { "iq": { "effect:": "iq", "impact": 5, "radius": 0 } },
-    { "vision": { "effect": "map", "impact": 0, "radius": 5 } }
+    {
+      "name": "heal",
+      "effect": "heal",
+      "impact": 10,
+      "radius": 0
+    },
+    {
+      "name": "mana",
+      "effect": "mana",
+      "impact": 10,
+      "radius": 0
+    },
+    {
+      "name": "shield",
+      "effect": "shield",
+      "impact": 20,
+      "radius": 0
+    },
+    {
+      "name": "vigor",
+      "effect": "vigor",
+      "impact": 15,
+      "radius": 0
+    },
+    {
+      "name": "iq",
+      "effect": "iq",
+      "impact": 5,
+      "radius": 0
+    },
+    {
+      "name": "vision",
+      "effect": "map",
+      "impact": 0,
+      "radius": 5
+    }
   ],
   "monsters": [
     {
@@ -381,25 +612,22 @@
   ],
   "stats": [
     {
-      "iq": {
-        "name": "Inteligence",
-        "min": 1,
-        "max": 9
-      }
+      "id": "iq",
+      "name": "Inteligence",
+      "min": 1,
+      "max": 9
     },
     {
-      "st": {
-        "name": "Strength",
-        "min": 1,
-        "max": 9
-      }
+      "id": "st",
+      "name": "Strength",
+      "min": 1,
+      "max": 9
     },
     {
-      "en": {
-        "name": "Endurance",
-        "min": 1,
-        "max": 9
-      }
+      "id": "en",
+      "name": "Endurance",
+      "min": 1,
+      "max": 9
     }
   ]
 }
