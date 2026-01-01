@@ -1,0 +1,87 @@
+﻿namespace Blitzkrieg.QuestV4.Lib.Configuration.Test;
+
+[TestClass]
+public class Test_Save_Game
+{
+    /// <summary>
+    /// Test context
+    /// </summary>
+    public TestContext TestContext { get; set; }
+
+    /// <summary>
+    /// File to read
+    /// </summary>
+    const string SaveFilename = @"./test_save_game.json";
+
+    /// <summary>
+    /// SaveGame under test
+    /// </summary>
+    public SaveGameRoot SaveGame { get; set; } = new SaveGameRoot();
+
+    [TestInitialize]
+    public void TestInit()
+    {
+        SaveGame = SaveGameJsonIO.FromFile(SaveFilename);
+    }
+
+
+    [TestMethod]
+    public void IsLoaded()
+    {
+        Assert.IsNotNull(SaveGame);
+    }
+
+    [TestMethod]
+    public void Experience_OK()
+    {
+        Assert.IsGreaterThan(0, SaveGame.Experience); 
+    }
+
+    [TestMethod]
+    public void Level_OK()
+    {
+        Assert.IsGreaterThan(0, SaveGame.Level);
+    }
+
+    [TestMethod]
+    public void Deaths_OK()
+    {
+        Assert.IsGreaterThan(0, SaveGame.Deaths);
+    }
+
+    [TestMethod]
+    public void Depth_OK()
+    {
+        Assert.IsGreaterThan(0, SaveGame.Depth);
+    }
+
+    [TestMethod]
+    public void MapFileName_OK()
+    {
+        Assert.IsFalse(string.IsNullOrWhiteSpace(SaveGame.MapFileName));
+    }
+    [TestMethod]
+    public void Stats_OK()
+    {
+       Assert.HasCount(3, SaveGame.Stats);
+        foreach(var stat in SaveGame.Stats)
+        {
+            Assert.IsFalse(string.IsNullOrWhiteSpace(stat.Key));
+            Assert.IsGreaterThan(0, stat.Value);
+        }
+    }
+    [TestMethod]
+    public void Inventory_OK()
+    {
+        Assert.HasCount(4, SaveGame.Inventory);
+        foreach(var item in SaveGame.Inventory)
+        {
+            Assert.IsFalse(string.IsNullOrWhiteSpace(item.Name));
+            Assert.IsGreaterThan(0, item.Quantity);
+            Assert.IsGreaterThan(0, item.Id);
+        }
+    }
+
+}
+
+

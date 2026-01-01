@@ -11,10 +11,19 @@
     <Content Include="..\settings.json" Link="settings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+	  <Content Include="..\test_save_game.json" Link="test_save_game.json">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Blitzkrieg.QuestV4.Lib.Configuration\Blitzkrieg.QuestV4.Lib.Configuration.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Test_Configuration.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

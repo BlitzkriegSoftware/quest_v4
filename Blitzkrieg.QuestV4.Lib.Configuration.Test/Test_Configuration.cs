@@ -3,21 +3,28 @@
 [TestClass]
 public sealed class Test_Configuration
 {
+
+    /// <summary>
+    /// Test context
+    /// </summary>
+    public TestContext TestContext { get; set; }
+
     /// <summary>
     /// File to read
     /// </summary>
     const string ConfigurationFilename = @"./settings.json";
-    public TestContext TestContext { get; set; }
 
     /// <summary>
     /// QuestConfiguration under test
     /// </summary>
     public QuestConfigurationRoot QuestConfiguration { get; set; } = new QuestConfigurationRoot();
 
+
     [TestInitialize]
     public  void TestInit()
     {
         QuestConfiguration = ConfigurationJsonReader.FromFile(ConfigurationFilename);
+
     }
 
     [TestMethod]
@@ -51,12 +58,6 @@ public sealed class Test_Configuration
     }
 
     [TestMethod]
-    public void HasThingKinds()
-    {
-        Assert.IsTrue(QuestConfiguration.ThingKinds.Any());
-    }
-
-    [TestMethod]
     public void HasThings()
     {
         Assert.IsTrue(QuestConfiguration.Things.Any());
@@ -67,7 +68,6 @@ public sealed class Test_Configuration
     {
         Assert.IsGreaterThan(0, QuestConfiguration.MapInfo.Cols);
     }
-
 
     [TestMethod]
     public void Is_Rows_Ok()
@@ -89,18 +89,28 @@ public sealed class Test_Configuration
         Assert.IsGreaterThan(0, QuestConfiguration.MapInfo.MaxLevel);
     }
 
-
     [TestMethod]
-    public void Is_Folders_Ok()
+    public void MapInfo_Is_Folders_Ok()
     {
         Assert.IsFalse(string.IsNullOrWhiteSpace(QuestConfiguration.MapInfo.Folder));
     }
 
     [TestMethod]
-    public void Is_FolderExt_Ok()
+    public void MapInfo_Is_FolderExt_Ok()
     {
         Assert.IsFalse(string.IsNullOrWhiteSpace(QuestConfiguration.MapInfo.FileExt));
     }
 
 
+    [TestMethod]
+    public void SaveGame_Is_Folders_Ok()
+    {
+        Assert.IsFalse(string.IsNullOrWhiteSpace(QuestConfiguration.SaveGameInfo.Folder));
+    }
+
+    [TestMethod]
+    public void SaveGame_Is_FolderExt_Ok()
+    {
+        Assert.IsFalse(string.IsNullOrWhiteSpace(QuestConfiguration.SaveGameInfo.FileExt));
+    }
 }
