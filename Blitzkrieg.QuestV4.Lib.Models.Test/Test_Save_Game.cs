@@ -1,8 +1,11 @@
-﻿using Blitzkrieg.QuestV4.Lib.Models;
+﻿using System.Diagnostics.CodeAnalysis;
+
+using Blitzkrieg.QuestV4.Lib.Models;
 
 namespace Blitzkrieg.QuestV4.Lib.Configuration.Test;
 
 [TestClass]
+[ExcludeFromCodeCoverage]
 public class Test_Save_Game
 {
     /// <summary>
@@ -82,6 +85,20 @@ public class Test_Save_Game
             Assert.IsGreaterThan(0, item.Quantity);
             Assert.IsGreaterThan(0, item.Id);
         }
+    }
+
+    [TestMethod]
+    public void SaveGame_ToString()
+    {
+        var s = SaveGame.ToString();
+        TestContext.WriteLine(s);
+        Assert.IsFalse(string.IsNullOrWhiteSpace(s));
+    }
+
+    [TestMethod]
+    public void SaveGame_IsValid()
+    {
+        Assert.IsTrue(SaveGame.IsValid());
     }
 
 }

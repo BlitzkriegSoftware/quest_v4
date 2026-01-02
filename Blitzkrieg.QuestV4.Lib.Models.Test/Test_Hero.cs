@@ -1,8 +1,13 @@
-﻿using Blitzkrieg.QuestV4.Lib.Models;
+﻿using System.Diagnostics.CodeAnalysis;
+
+using Blitzkrieg.QuestV4.Lib.Models;
+
+using Newtonsoft.Json.Linq;
 
 namespace Blitzkrieg.QuestV4.Lib.Models.Test;
 
 [TestClass]
+[ExcludeFromCodeCoverage]
 public class Test_Hero
 {
 
@@ -49,5 +54,41 @@ public class Test_Hero
         var hero = Hero.FromSaveGame(saveGame);
         Assert.IsNotNull(hero);
         Assert.IsTrue(hero.IsValid());
+    }
+
+    [TestMethod]
+    public void Test_ComputeScore()
+    {
+        var hero = new Hero("Frog")
+        {
+            Deaths = 3,
+            Experience = 1500
+        };
+        var (score, log) = hero.ComputeScore();
+        Assert.IsTrue(score > 0);
+        Assert.IsNotNull(log);
+        Assert.IsNotEmpty(log);
+        TestContext.WriteLine($"Score: {score}");
+        TestContext.WriteLine($"Log: {string.Join("\n", log)}");
+    }
+
+    [TestMethod]
+    public void Test_IsValid()
+    {
+        var hero = new Hero("Frog")
+        {
+            Deaths = 2,
+            Experience = 500
+        };
+        Assert.IsTrue(hero.IsValid());
+    }
+
+    [TestMethod]
+    public void Test_ComputeHitPoints()
+    {
+        var hero = new Hero("Frog");
+        var hp = hero.ComputeHitPoints();
+        Assert.IsGreaterThan(0, hp);
+        TestContext.WriteLine($"Hit Points: {hp}");
     }
 }

@@ -33,4 +33,13 @@ public class Stat
     /// </summary>
     [JsonProperty(nameof(Max))]
     public int Max { get; set; }
+
+    /// <summary>
+    /// Debug string
+    /// </summary>
+    /// <returns></returns>
+    public override string ToString()
+    {
+        return $"{Id}: {Name} (Min={Min}, Max={Max})";
+    }
 }

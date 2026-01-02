@@ -34,4 +34,13 @@ public class Scroll
     /// </summary>
     [JsonProperty(nameof(Radius))]
     public int Radius { get; set; }
+
+    /// <summary>
+    /// Debug string
+    /// </summary>
+    /// <returns></returns>
+    public override string ToString()
+    {
+        return $"{Name} (Effect: {Effect}, Impact: {Impact}, Radius: {Radius})";
+    }   
 }

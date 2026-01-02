@@ -37,5 +37,15 @@ namespace Blitzkrieg.QuestV4.Lib.Models
         /// </summary>
         [JsonProperty(nameof(Kind))]
         public int Kind { get; set; }
+
+        /// <summary>
+        /// Debug string
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return $"{Id}: {Name} (U+{Unicode}) Kind={Kind}";
+        }
+
     }
 }

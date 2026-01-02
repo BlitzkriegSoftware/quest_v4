@@ -77,7 +77,6 @@ public class SaveGameRoot
             && Level > 0
             && Experience >= 0
             && !string.IsNullOrWhiteSpace(MapFileName)
-            && File.Exists(MapFileName)
             && Stats != null
             && Inventory != null;
     }

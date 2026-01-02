@@ -1,8 +1,11 @@
-﻿using Blitzkrieg.QuestV4.Lib.Models;
+﻿using System.Diagnostics.CodeAnalysis;
+
+using Blitzkrieg.QuestV4.Lib.Models;
 
 namespace Blitzkrieg.QuestV4.Lib.Configuration.Test;
 
 [TestClass]
+[ExcludeFromCodeCoverage]
 public sealed class Test_Configuration
 {
 
@@ -60,6 +63,25 @@ public sealed class Test_Configuration
     }
 
     [TestMethod]
+    public void Stat_ToString()
+    {
+        var s = QuestConfiguration.Stats[0].ToString();
+        TestContext.WriteLine(s);
+        Assert.IsFalse(string.IsNullOrWhiteSpace(s));
+    }
+
+    [TestMethod]
+    public void Stat_List_ToString()
+    {
+        foreach (var stat in QuestConfiguration.Stats)
+        {
+            var s = stat.ToString();
+            TestContext.WriteLine(s);
+            Assert.IsFalse(string.IsNullOrWhiteSpace(s));
+        }
+    }
+
+    [TestMethod]
     public void HasThings()
     {
         Assert.IsTrue(QuestConfiguration.Things.Any());
@@ -114,5 +136,81 @@ public sealed class Test_Configuration
     public void SaveGame_Is_FolderExt_Ok()
     {
         Assert.IsFalse(string.IsNullOrWhiteSpace(QuestConfiguration.SaveGameInfo.FileExt));
+    }
+
+    [TestMethod]
+    public void Monster_ToString()
+    {
+        var s = QuestConfiguration.Monsters[0].ToString();
+        TestContext.WriteLine(s);
+        Assert.IsFalse(string.IsNullOrWhiteSpace(s));
+    }
+
+    [TestMethod]
+    public void Monster_List_ToString()
+    {
+        foreach (var monster in QuestConfiguration.Monsters)
+        {
+            var s = monster.ToString();
+            TestContext.WriteLine(s);
+            Assert.IsFalse(string.IsNullOrWhiteSpace(s));
+        }
+    }
+
+    [TestMethod]
+    public void Potion_ToString()
+    {
+        var s = QuestConfiguration.Potions[0].ToString();
+        TestContext.WriteLine(s);
+        Assert.IsFalse(string.IsNullOrWhiteSpace(s));
+    }
+
+    [TestMethod]
+    public void Potion_List_ToString()
+    {
+        foreach (var potion in QuestConfiguration.Potions)
+        {
+            var s = potion.ToString();
+            TestContext.WriteLine(s);
+            Assert.IsFalse(string.IsNullOrWhiteSpace(s));
+        }
+    }   
+
+    [TestMethod]
+    public void Scroll_ToString()
+    {
+        var s = QuestConfiguration.Scrolls[0].ToString();
+        TestContext.WriteLine(s);
+        Assert.IsFalse(string.IsNullOrWhiteSpace(s));
+    }
+
+    [TestMethod]
+    public void Scroll_List_ToString()
+    {
+        foreach (var scroll in QuestConfiguration.Scrolls)
+        {
+            var s = scroll.ToString();
+            TestContext.WriteLine(s);
+            Assert.IsFalse(string.IsNullOrWhiteSpace(s));
+        }
+    }
+
+    [TestMethod]
+    public void Thing_ToString()
+    {
+        var s = QuestConfiguration.Things[0].ToString();
+        TestContext.WriteLine(s);
+        Assert.IsFalse(string.IsNullOrWhiteSpace(s));
+    }
+
+    [TestMethod]
+    public void Things_List__ToString()
+    {
+        foreach (var thing in QuestConfiguration.Things)
+        {
+            var s = thing.ToString();
+            TestContext.WriteLine(s);
+            Assert.IsFalse(string.IsNullOrWhiteSpace(s));
+        }
     }
 }

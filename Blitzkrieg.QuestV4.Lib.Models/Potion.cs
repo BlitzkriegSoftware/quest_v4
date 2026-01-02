@@ -31,4 +31,10 @@ public class Potion
     /// </summary>
     [JsonProperty(nameof(Radius))]
     public int Radius { get; set; }
+
+    /// <summary>
+    /// Debug String
+    /// </summary>
+    /// <returns></returns>
+    public override string ToString() => $"{Name} (Effect: {Effect}, Impact: {Impact}, Radius: {Radius})";
 }
