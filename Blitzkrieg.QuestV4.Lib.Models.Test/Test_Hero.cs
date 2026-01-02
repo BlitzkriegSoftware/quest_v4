@@ -1,4 +1,6 @@
-﻿namespace Blitzkrieg.QuestV4.Lib.Configuration.Test;
+﻿using Blitzkrieg.QuestV4.Lib.Models;
+
+namespace Blitzkrieg.QuestV4.Lib.Models.Test;
 
 [TestClass]
 public class Test_Hero

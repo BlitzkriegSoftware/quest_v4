@@ -17,10 +17,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Blitzkrieg.QuestV4.Lib.Configuration\Blitzkrieg.QuestV4.Lib.Configuration.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<Compile Update="Test_Configuration.cs">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Compile>
@@ -33,6 +29,10 @@
 		<PackageReference Include="coverlet.collector" Version="6.0.4" />
 		<PackageReference Include="Microsoft.CodeCoverage" Version="17.14.1" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Blitzkrieg.QuestV4.Lib.Models\Blitzkrieg.QuestV4.Lib.Models.csproj" />
 	</ItemGroup>
 
 </Project>
