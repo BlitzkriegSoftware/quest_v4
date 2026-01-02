@@ -9,8 +9,10 @@ public class Hero
 {
     #region "Constants"
     private const double HP_EXP_BASE = 1.1;
+    private const double MANA_EXP_BASE = 1.4;
     private const double ST_BONUS = 1.1;
     private const double EN_BONUS = 1.3;
+    private const int MANA_BASE = 100;
     private const int SCORE_PER_LEVEL = 1000;
     private const int SCORE_PER_EXPERIENCE = 10;
     private const int SCORE_PER_POTION = 2;
@@ -78,6 +80,11 @@ public class Hero
     public int Damage { get; set; } = 0;
 
     /// <summary>
+    /// Manu Used
+    /// </summary>
+    public int ManaUsed { get; set; } = 0;
+
+    /// <summary>
     /// How many times have we died
     /// </summary>
     public int Deaths { get; set; } = 0;
@@ -111,6 +118,21 @@ public class Hero
         hp = (int)(hp * Math.Pow(HP_EXP_BASE, this.Level));
 
         return hp;
+    }
+
+    /// <summary>
+    /// Compute Mana
+    /// </summary>
+    /// <returns>Computed Mana</returns>
+    public int ComputeMana()
+    {
+        int mana = MANA_BASE;
+        var iq = this.Stats.FirstOrDefault(i => i.Key == "iq");
+        if(iq.Value > 0)
+        {
+            mana += mana + (int)(iq.Value * Math.Pow(MANA_EXP_BASE, this.Level));
+        } 
+        return mana;
     }
 
     /// <summary>
@@ -200,6 +222,68 @@ public class Hero
     }
 
     /// <summary>
+    /// Bump a player stat up or down
+    /// </summary>
+    /// <param name="config">QuestConfigurationRoot</param>
+    /// <param name="name">stat name</param>
+    /// <param name="bump">increment (+) or decrement (-)</param>
+    public void BumpStat(QuestConfigurationRoot config, string name, int bump = 1)
+    {
+        var stat = this.Stats.FirstOrDefault(i => i.Key == name);
+        var sdef = config.Stats.FirstOrDefault(i => i.Name == name);
+        if (stat.Value > 0 && sdef != null)
+        {
+            if (stat.Value < sdef.Max)
+            {
+                this.Stats[name] = this.Stats[name] + bump;
+            }
+        }
+    }
+
+
+    public string DrinkPotion(QuestConfigurationRoot config, string name)
+    {
+        string result = "You have no potions left!";
+        var inventoryItem = this.Inventory.FirstOrDefault(i => i.Id == 40 && i.Quantity > 0 && i.Name == name);
+        if (inventoryItem != null)
+        {
+
+            var potion = config.Potions.FirstOrDefault(i => i.Name == name);
+            if (potion != null)
+            {
+                inventoryItem.Quantity--;
+
+                switch (name)
+                {
+                    case "heal":
+                        result = "You feel rejuvenated!";
+                        this.Damage -= potion.Impact;
+                        if (this.Damage < 0) this.Damage = 0;
+                        break;
+                    case "mana":
+                        result = "Your magical energies are restored!";
+                        this.ManaUsed -= potion.Impact;
+                        if (this.ManaUsed < 0) this.ManaUsed = 0;
+                        break;
+                    case "iq":
+                        result = "You feel smarter";
+                        BumpStat(config, "iq");
+                        break;
+                    case "en":
+                        result = "You feel tougher";
+                        BumpStat(config, "en");
+                        break;
+                    case "st":
+                        result = "A shimmering shield surrounds you!";
+                        BumpStat(config, "st");
+                        break;
+                }
+            }
+        }
+        return result;
+    }
+
+    /// <summary>
     /// Hero is valid
     /// <para>Does not validate location</para>
     /// </summary>
@@ -214,6 +298,15 @@ public class Hero
             this.Experience > 0 &&
             this.ComputeHitPoints() > 0
             ;
+    }
+
+    /// <summary>
+    /// Geo Location is OK
+    /// </summary>
+    /// <returns>True if so</returns>
+    public bool GeoOk()
+    {
+        return this.X >= 0 && this.Y >= 0 && this.Level > 0;
     }
 
     /// <summary>

@@ -101,6 +101,25 @@ public class Test_Save_Game
         Assert.IsTrue(SaveGame.IsValid());
     }
 
+    [TestMethod]
+    public void SaveGame_RoundTrip()
+    {
+        // Save to temp file
+        string tempFilename = Path.GetTempFileName();
+        SaveGameJsonIO.ToFile(tempFilename, SaveGame);
+        // Read back
+        var loadedSaveGame = SaveGameJsonIO.FromFile(tempFilename);
+        // Compare
+        Assert.AreEqual(SaveGame.PlayerName, loadedSaveGame.PlayerName);
+        Assert.AreEqual(SaveGame.Level, loadedSaveGame.Level);
+        Assert.AreEqual(SaveGame.Experience, loadedSaveGame.Experience);
+        Assert.AreEqual(SaveGame.MapFileName, loadedSaveGame.MapFileName);
+        Assert.HasCount(SaveGame.Stats.Count, loadedSaveGame.Stats);
+        Assert.HasCount(SaveGame.Inventory.Count, loadedSaveGame.Inventory);
+        // Clean up
+        File.Delete(tempFilename);
+    }
+
 }
 
 

@@ -36,11 +36,23 @@ public class Scroll
     public int Radius { get; set; }
 
     /// <summary>
+    /// Minimum level required to use the scroll
+    /// </summary>
+    [JsonProperty(nameof(MinLevel))]
+    public int MinLevel { get; set; }
+
+    /// <summary>
+    /// Maximum level to use the scroll
+    /// </summary>
+    [JsonProperty(nameof(MaxLevel))]
+    public int MaxLevel { get; set; }
+
+    /// <summary>
     /// Debug string
     /// </summary>
     /// <returns></returns>
     public override string ToString()
     {
-        return $"{Name} (Effect: {Effect}, Impact: {Impact}, Radius: {Radius})";
+        return $"{Name} [Lvl {MinLevel}-{MaxLevel}] (Effect: {Effect}, Impact: {Impact}, Radius: {Radius})";
     }   
 }

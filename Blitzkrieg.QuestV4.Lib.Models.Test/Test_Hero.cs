@@ -1,7 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-
 using Blitzkrieg.QuestV4.Lib.Models;
-
 using Newtonsoft.Json.Linq;
 
 namespace Blitzkrieg.QuestV4.Lib.Models.Test;
@@ -78,9 +76,13 @@ public class Test_Hero
         var hero = new Hero("Frog")
         {
             Deaths = 2,
-            Experience = 500
+            Experience = 500,
+            X = 10,
+            Y = 15,
+            Depth = 3
         };
         Assert.IsTrue(hero.IsValid());
+        Assert.IsTrue(hero.GeoOk());
     }
 
     [TestMethod]
@@ -90,5 +92,14 @@ public class Test_Hero
         var hp = hero.ComputeHitPoints();
         Assert.IsGreaterThan(0, hp);
         TestContext.WriteLine($"Hit Points: {hp}");
+    }
+
+    [TestMethod]
+    public void Test_ComputeMana()
+    {
+        var hero = new Hero("Frog");
+        var mp = hero.ComputeMana();
+        Assert.IsGreaterThan(0, mp);
+        TestContext.WriteLine($"Magic Points: {mp}");
     }
 }

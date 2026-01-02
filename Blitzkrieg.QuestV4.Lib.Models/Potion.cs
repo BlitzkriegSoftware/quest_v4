@@ -32,9 +32,12 @@ public class Potion
     [JsonProperty(nameof(Radius))]
     public int Radius { get; set; }
 
+    [JsonProperty(nameof(Chance))]
+    public double Chance { get; set; } = 0.0;
+
     /// <summary>
     /// Debug String
     /// </summary>
     /// <returns></returns>
-    public override string ToString() => $"{Name} (Effect: {Effect}, Impact: {Impact}, Radius: {Radius})";
+    public override string ToString() => $"{Name} (Effect: {Effect}, Impact: {Impact}, Radius: {Radius}, Chance: {Chance:n2})";
 }
