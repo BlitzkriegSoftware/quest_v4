@@ -20,7 +20,7 @@
       "attack": "1d4",
       "defense": 5,
       "movement": 1,
-      "hits": 10,
+      "hitsBase": 10,
       "special": "p",
       "levelMod": 0.1
     },
@@ -32,7 +32,7 @@
       "attack": "1d10+2",
       "defense": 9,
       "movement": 1,
-      "hits": 20,
+      "hitsBase": 20,
       "special": "",
       "levelMod": 0.2
     },
@@ -44,7 +44,7 @@
       "attack": "1d8",
       "defense": 6,
       "movement": 1,
-      "hits": 12,
+      "hitsBase": 12,
       "special": "",
       "levelMod": 0.15
     },
@@ -56,7 +56,7 @@
       "attack": "4d10+3",
       "defense": 40,
       "movement": 2,
-      "hits": 60,
+      "hitsBase": 60,
       "special": "f",
       "levelMod": 0.3
     },
@@ -68,7 +68,7 @@
       "attack": "1d4",
       "defense": 6,
       "movement": 3,
-      "hits": 8,
+      "hitsBase": 8,
       "special": "",
       "levelMod": 0.0
     },
@@ -80,7 +80,7 @@
       "attack": "3d8",
       "defense": 16,
       "movement": 2,
-      "hits": 20,
+      "hitsBase": 20,
       "special": "",
       "levelMod": 0.2
     },
@@ -92,7 +92,7 @@
       "attack": "2d4+2",
       "defense": 10,
       "movement": 1,
-      "hits": 10,
+      "hitsBase": 10,
       "special": "",
       "levelMod": 0.05
     },
@@ -104,7 +104,7 @@
       "attack": "3d6+4",
       "defense": 20,
       "movement": 1,
-      "hits": 20,
+      "hitsBase": 20,
       "special": "p",
       "levelMod": 0.4
     },
@@ -116,7 +116,7 @@
       "attack": "3d6+4",
       "defense": 20,
       "movement": 1,
-      "hits": 20,
+      "hitsBase": 20,
       "special": "p",
       "levelMod": 0.1
     },
@@ -128,7 +128,7 @@
       "attack": "1d6+1",
       "defense": 12,
       "movement": 1,
-      "hits": 15,
+      "hitsBase": 15,
       "special": "",
       "levelMod": 0.1
     },
@@ -140,7 +140,7 @@
       "attack": "1d8",
       "defense": 10,
       "movement": 1,
-      "hits": 10,
+      "hitsBase": 10,
       "special": "",
       "levelMod": 0.01
     },
@@ -152,7 +152,7 @@
       "attack": "1d6",
       "defense": 8,
       "movement": 1,
-      "hits": 18,
+      "hitsBase": 18,
       "special": "",
       "levelMod": 0.05
     },
@@ -164,7 +164,7 @@
       "attack": "1d4",
       "defense": 8,
       "movement": 1,
-      "hits": 30,
+      "hitsBase": 30,
       "special": "a",
       "levelMod": 0.8
     },
@@ -176,7 +176,7 @@
       "attack": "1d6",
       "defense": 5,
       "movement": 1,
-      "hits": 8,
+      "hitsBase": 8,
       "special": "",
       "levelMod": 0.4
     },
@@ -188,7 +188,7 @@
       "attack": "3d6",
       "defense": 16,
       "movement": 1,
-      "hits": 30,
+      "hitsBase": 30,
       "special": "",
       "levelMod": 0.8
     },
@@ -200,7 +200,7 @@
       "attack": "1d6",
       "defense": 10,
       "movement": 1,
-      "hits": 22,
+      "hitsBase": 22,
       "special": "p",
       "levelMod": 0.1
     },
@@ -212,7 +212,7 @@
       "attack": "1d6",
       "defense": 18,
       "movement": 1,
-      "hits": 28,
+      "hitsBase": 28,
       "special": "a",
       "levelMod": 0.9
     },
@@ -224,7 +224,7 @@
       "attack": "1d4",
       "defense": 4,
       "movement": 1,
-      "hits": 8,
+      "hitsBase": 8,
       "special": "",
       "levelMod": 0.0
     },
@@ -236,7 +236,7 @@
       "attack": "3d10",
       "defense": 8,
       "movement": 3,
-      "hits": 18,
+      "hitsBase": 18,
       "special": "",
       "levelMod": 0.7
     },
@@ -248,7 +248,7 @@
       "attack": "4d6",
       "defense": 12,
       "movement": 1,
-      "hits": 20,
+      "hitsBase": 20,
       "special": "",
       "levelMod": 0.1
     },
@@ -260,7 +260,7 @@
       "attack": "3d6",
       "defense": 6,
       "movement": 2,
-      "hits": 30,
+      "hitsBase": 30,
       "special": "",
       "levelMod": 0.2
     },
@@ -272,7 +272,7 @@
       "attack": "5d10",
       "defense": 40,
       "movement": 2,
-      "hits": 40,
+      "hitsBase": 40,
       "special": "f",
       "levelMod": 0.9
     },
@@ -284,7 +284,7 @@
       "attack": "2d6",
       "defense": 8,
       "movement": 1,
-      "hits": 26,
+      "hitsBase": 26,
       "special": "m",
       "levelMod": 0.7
     },
@@ -296,7 +296,7 @@
       "attack": "3d6",
       "defense": 14,
       "movement": 2,
-      "hits": 22,
+      "hitsBase": 22,
       "special": "",
       "levelMod": 0.6
     },
@@ -308,7 +308,7 @@
       "attack": "3d8",
       "defense": 20,
       "movement": 1,
-      "hits": 30,
+      "hitsBase": 30,
       "special": "",
       "levelMod": 0.5
     },
@@ -320,7 +320,7 @@
       "attack": "2d6",
       "defense": 16,
       "movement": 3,
-      "hits": 14,
+      "hitsBase": 14,
       "special": "f",
       "levelMod": 0.7
     }

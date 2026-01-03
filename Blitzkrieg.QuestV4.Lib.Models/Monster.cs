@@ -21,6 +21,11 @@ public class Monster
     public const string ALLOWED_SPECIALS = "afmpt";
 
     /// <summary>
+    /// Monster HP Modifier
+    /// </summary>
+    public const double HP_MODIFIER = 0.52f;
+
+    /// <summary>
     /// Symbol representing the monster
     /// </summary>
     [JsonProperty(nameof(Symbol))]
@@ -65,8 +70,8 @@ public class Monster
     /// <summary>
     /// Base Hit Points of the monster
     /// </summary>
-    [JsonProperty(nameof(Hits))]
-    public int Hits { get; set; }
+    [JsonProperty(nameof(HitsBase))]
+    public int HitsBase { get; set; }
 
     /// <summary>
     /// Special abilities of the monster
@@ -80,11 +85,23 @@ public class Monster
     [JsonProperty(nameof(LevelMod))]
     public double LevelMod { get; set; }
 
-
+    /// <summary>
+    /// Compute monster hitpoints
+    /// </summary>
+    /// <param name="level"></param>
+    /// <param name="baseHits"></param>
+    /// <param name="levelMod"></param>
+    /// <returns>HitPointsAdjusted</returns>
     public static int HitPointsAdjusted(int level, int baseHits, double levelMod)
     {
-        return (int)Math.Round(baseHits + (baseHits * (level * levelMod)), 0);
+        double red = Math.Pow(HP_MODIFIER + levelMod, level);
+        return baseHits + (int)Math.Round(baseHits * red, 0);
     }
+
+    /// <summary>
+    /// Hit Points
+    /// </summary>
+    public int HitPointsRemaing { get; set; } = 0;
 
     /// <summary>
     /// Monster Debug String
@@ -93,6 +110,6 @@ public class Monster
     /// and speed modifier.</returns>
     public override string ToString()
     {
-        return $"{Symbol}: {Name} (Lvl {MinLevel}-{MaxLevel}) ATK:{Attack} DEF:{Defense} MOV:{Movement} HP:{Hits} SPD:{LevelMod} Special: {Special}";
+        return $"{Symbol}: {Name} (Lvl {MinLevel}-{MaxLevel}) ATK:{Attack} DEF:{Defense} MOV:{Movement} HP:{HitsBase} SPD:{LevelMod} Special: {Special}";
     }
 }

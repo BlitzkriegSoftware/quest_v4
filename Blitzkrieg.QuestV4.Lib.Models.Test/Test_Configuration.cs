@@ -220,4 +220,21 @@ public sealed class Test_Configuration
         Assert.IsGreaterThanOrEqualTo(0, hp);
     }
 
+
+    [TestMethod]
+    public void Monster_HitPointsRamp()
+    {
+        int baseHits = 10;
+        for (int level = 1; level <= 20; level++)
+        {
+            for (double mod = 0.0; mod < 0.5; mod = mod + 0.05)
+            {
+                var hp = Monster.HitPointsAdjusted(level, baseHits, mod);
+                TestContext.WriteLine($"Base: {baseHits}, Level: {level}, Mod: {mod:n2} -> {hp}");
+                Assert.IsGreaterThanOrEqualTo(0, hp);
+            }
+        }
+
+    }
+
 }
