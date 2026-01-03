@@ -20,8 +20,9 @@ public class Hero
     private const int SCORE_PER_GOLD = 1;
     private const int SCORE_PER_JEWEL = 9;
     private const int SCORE_PER_DEATH = -500;
-    private const int STAT_INITIAL_VALUE = 4;
-    private readonly string[] STAT_LIST = ["st", "en", "iq"];
+    public const int STAT_INITIAL_VALUE = 4;
+    public const string NOTHING_HAPPENS = "Nothing happens";
+    public readonly string[] STAT_LIST = ["st", "en", "iq"];
     private readonly InventoryItem[] INVENTORY_LIST = [
         new() { Id =  40, Name = "heal", Quantity = 3},
         new() { Id =  40, Name = "mana", Quantity = 3},
@@ -100,6 +101,17 @@ public class Hero
     public Dictionary<string, int> Stats { get; set; }
 
     /// <summary>
+    /// Get value for stat
+    /// </summary>
+    /// <param name="key">Stat</param>
+    /// <returns>Value</returns>
+    public int StatValue(string key)
+    {
+        return Stats[key];
+    }
+
+
+    /// <summary>
     /// Compute hit points
     /// </summary>
     /// <returns></returns>
@@ -128,10 +140,10 @@ public class Hero
     {
         int mana = MANA_BASE;
         var iq = this.Stats.FirstOrDefault(i => i.Key == "iq");
-        if(iq.Value > 0)
+        if (iq.Value > 0)
         {
             mana += mana + (int)(iq.Value * Math.Pow(MANA_EXP_BASE, this.Level));
-        } 
+        }
         return mana;
     }
 
@@ -230,7 +242,7 @@ public class Hero
     public void BumpStat(QuestConfigurationRoot config, string name, int bump = 1)
     {
         var stat = this.Stats.FirstOrDefault(i => i.Key == name);
-        var sdef = config.Stats.FirstOrDefault(i => i.Name == name);
+        var sdef = config.Stats.FirstOrDefault(i => i.Id == name);
         if (stat.Value > 0 && sdef != null)
         {
             if (stat.Value < sdef.Max)
@@ -243,11 +255,10 @@ public class Hero
 
     public string DrinkPotion(QuestConfigurationRoot config, string name)
     {
-        string result = "You have no potions left!";
+        string result = NOTHING_HAPPENS;
         var inventoryItem = this.Inventory.FirstOrDefault(i => i.Id == 40 && i.Quantity > 0 && i.Name == name);
         if (inventoryItem != null)
         {
-
             var potion = config.Potions.FirstOrDefault(i => i.Name == name);
             if (potion != null)
             {
@@ -274,7 +285,7 @@ public class Hero
                         BumpStat(config, "en");
                         break;
                     case "st":
-                        result = "A shimmering shield surrounds you!";
+                        result = "Strength flows into you";
                         BumpStat(config, "st");
                         break;
                 }

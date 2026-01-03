@@ -26,10 +26,9 @@ public sealed class Test_Configuration
 
 
     [TestInitialize]
-    public  void TestInit()
+    public void TestInit()
     {
         QuestConfiguration = ConfigurationJsonReader.FromFile(ConfigurationFilename);
-
     }
 
     [TestMethod]
@@ -174,7 +173,7 @@ public sealed class Test_Configuration
             TestContext.WriteLine(s);
             Assert.IsFalse(string.IsNullOrWhiteSpace(s));
         }
-    }   
+    }
 
     [TestMethod]
     public void Scroll_ToString()

@@ -1,6 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Blitzkrieg.QuestV4.Lib.Models;
-using Newtonsoft.Json.Linq;
 
 namespace Blitzkrieg.QuestV4.Lib.Models.Test;
 
@@ -14,9 +12,20 @@ public class Test_Hero
     /// </summary>
     public TestContext TestContext { get; set; }
 
+    /// <summary>
+    /// File to read
+    /// </summary>
+    const string ConfigurationFilename = @"./settings.json";
+
+    /// <summary>
+    /// QuestConfiguration under test
+    /// </summary>
+    public QuestConfigurationRoot QuestConfiguration { get; set; } = new QuestConfigurationRoot();
+
     [TestInitialize]
     public void TestInit()
     {
+        QuestConfiguration = ConfigurationJsonReader.FromFile(ConfigurationFilename);
     }
 
     [TestMethod]
@@ -102,4 +111,82 @@ public class Test_Hero
         Assert.IsGreaterThan(0, mp);
         TestContext.WriteLine($"Magic Points: {mp}");
     }
+
+    [TestMethod]
+    public void Test_Damage()
+    {
+        var hero = new Hero("Frog")
+        {
+            Deaths = 2,
+            Experience = 500,
+            X = 10,
+            Y = 15,
+            Depth = 3
+        };
+        Assert.IsGreaterThanOrEqualTo(0, hero.Damage);
+    }
+
+    [TestMethod]
+    public void Test_ManaUsed()
+    {
+        var hero = new Hero("Frog")
+        {
+            Deaths = 2,
+            Experience = 500,
+            X = 10,
+            Y = 15,
+            Depth = 3
+        };
+        Assert.IsGreaterThanOrEqualTo(0, hero.ManaUsed);
+    }
+
+    [TestMethod]
+    public void Test_UsePotion()
+    {
+        var hero = new Hero("Frog")
+        {
+            Deaths = 2,
+            Experience = 500,
+            X = 10,
+            Y = 15,
+            Depth = 3
+        };
+
+        hero.Inventory.Add(new InventoryItem()
+        {
+            Id = 40,
+            Name = "st",
+            Quantity = 3
+        });
+
+        hero.Inventory.Add(new InventoryItem()
+        {
+            Id = 40,
+            Name = "en",
+            Quantity = 3
+        });
+        hero.Inventory.Add(new InventoryItem()
+        {
+            Id = 40,
+            Name = "iq",
+            Quantity = 3
+        });
+
+        hero.Damage = 100;
+        var msg = hero.DrinkPotion(QuestConfiguration, "heal");
+        Assert.AreEqual(90, hero.Damage);
+        hero.ManaUsed = 100;
+        msg = hero.DrinkPotion(QuestConfiguration, "mana");
+        Assert.AreEqual(90, hero.ManaUsed);
+
+        foreach (string key in hero.STAT_LIST)
+        {
+            msg = hero.DrinkPotion(QuestConfiguration, key);
+            Assert.AreEqual(1 + Hero.STAT_INITIAL_VALUE, hero.StatValue(key), key);
+        }
+
+        msg = hero.DrinkPotion(QuestConfiguration, "xx");
+        Assert.AreEqual(Hero.NOTHING_HAPPENS, msg);
+    }
+
 }
