@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-
 using Blitzkrieg.QuestV4.Lib.Models;
 
 namespace Blitzkrieg.QuestV4.Lib.Configuration.Test;
@@ -212,4 +211,13 @@ public sealed class Test_Configuration
             Assert.IsFalse(string.IsNullOrWhiteSpace(s));
         }
     }
+
+    [TestMethod]
+    public void Monster_HitPoints()
+    {
+        var hp = Monster.HitPointsAdjusted(3, 10, 1.1);
+        TestContext.WriteLine($"{hp}");
+        Assert.IsGreaterThanOrEqualTo(0, hp);
+    }
+
 }

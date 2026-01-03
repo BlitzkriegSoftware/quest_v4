@@ -93,6 +93,6 @@ public class Monster
     /// and speed modifier.</returns>
     public override string ToString()
     {
-        return $"{Name} (Lvl {MinLevel}-{MaxLevel}) ATK:{Attack} DEF:{Defense} MOV:{Movement} HP:{Hits} SPD:{LevelMod}";
+        return $"{Symbol}: {Name} (Lvl {MinLevel}-{MaxLevel}) ATK:{Attack} DEF:{Defense} MOV:{Movement} HP:{Hits} SPD:{LevelMod} Special: {Special}";
     }
 }
