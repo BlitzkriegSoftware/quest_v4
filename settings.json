@@ -1,11 +1,9 @@
 {
   "mapInfo": {
-    "Rows": 40,
-    "Cols": 120,
     "MinLevel": 1,
     "MaxLevel": 20,
     "Folder": "./maps/",
-    "FileExt": ".map"
+    "FileExt": ".csv"
   },
   "saveGameInfo": {
     "Folder": "./saves/",
@@ -537,6 +535,12 @@
     }
   ],
   "things": [
+    {
+      "Id": 0,
+      "name": "empty",
+      "unicode": " ",
+      "kind": 0
+    },
     {
       "id": 1,
       "name": "horizontal",

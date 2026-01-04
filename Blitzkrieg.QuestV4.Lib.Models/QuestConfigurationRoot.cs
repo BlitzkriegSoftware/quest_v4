@@ -45,4 +45,24 @@ public class QuestConfigurationRoot
     /// </summary>
     [JsonProperty(nameof(Stats))]
     public List<Stat> Stats { get; } = [];
+
+    /// <summary>
+    /// GetThingByName
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public Thing GetThingByName(string name)
+    {
+        return Things.FirstOrDefault(t => t.Name == name);
+    }
+
+    /// <summary>
+    /// GetThingById
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public Thing GetThingById(int id)
+    {
+        return Things.FirstOrDefault(t => t.Id == id);
+    }
 }

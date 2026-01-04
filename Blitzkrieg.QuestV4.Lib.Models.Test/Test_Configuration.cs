@@ -86,19 +86,6 @@ public sealed class Test_Configuration
     }
 
     [TestMethod]
-    public void Is_Cols_Ok()
-    {
-        Assert.IsGreaterThan(0, QuestConfiguration.MapInfo.Cols);
-    }
-
-    [TestMethod]
-    public void Is_Rows_Ok()
-    {
-        Assert.IsGreaterThan(0, QuestConfiguration.MapInfo.Rows);
-    }
-
-
-    [TestMethod]
     public void Is_MinLevel_Ok()
     {
         Assert.IsGreaterThan(0, QuestConfiguration.MapInfo.MinLevel);

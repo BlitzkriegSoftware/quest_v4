@@ -8,18 +8,6 @@ namespace Blitzkrieg.QuestV4.Lib.Models;
 public class MapInfo
 {
     /// <summary>
-    /// Map rows
-    /// </summary>
-    [JsonProperty(nameof(Rows))]
-    public int Rows { get; set; }
-
-    /// <summary>
-    /// Map columns
-    /// </summary>
-    [JsonProperty(nameof(Cols))]
-    public int Cols { get; set; }
-
-    /// <summary>
     /// Minimum level
     /// </summary>
     [JsonProperty(nameof(MinLevel))]
