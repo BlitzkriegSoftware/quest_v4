@@ -1,21 +1,46 @@
-﻿using System.Data.SqlTypes;
-
-namespace Blitzkrieg.QuestV4.Lib.Models;
+﻿namespace Blitzkrieg.QuestV4.Lib.Models;
 
 public class MapLevel
 {
 
     #region "Constants, Fields and Properties"
-    private const int MapColsDefault = 120;
-    private const int MapRowsDefault = 40;
+    public const int MapColsDefault = 120;
+    public const int MapRowsDefault = 40;
     private readonly QuestConfigurationRoot _config;
-    private  Thing _floor;
+    private Thing _floor;
+    private MapSquare _floorMapSquare;
+    private MapSquare[,] _squares { get; set; } = null;
 
-    public Thing Floor
+    public MapSquare[,] Squares
     {
         get
         {
-            if(_floor == null && _config != null)
+            if (_squares == null)
+            {
+                _squares = new MapSquare[MapRowsDefault, MapColsDefault];
+            }
+            return _squares;
+        }
+    }
+
+    public MapSquare FloorMapSquare
+    {
+        get
+        {
+            if (_floorMapSquare.Id == 0)
+            {
+                _floorMapSquare = new MapSquare(this.FloorThing.Id, this.FloorThing.Unicode, false);
+            }
+            return _floorMapSquare;
+
+        }
+    }
+
+    public Thing FloorThing
+    {
+        get
+        {
+            if (_floor == null && _config != null)
             {
                 _floor = _config.GetThingByName("floor");
             }
@@ -25,12 +50,6 @@ public class MapLevel
     #endregion
 
     #region "CTOR"
-    public MapLevel()
-    {
-        this.Width = MapColsDefault;
-        this.Height = MapRowsDefault;
-        this.Squares = new MapSquare[MapColsDefault, MapRowsDefault];
-    }
 
     /// <summary>
     /// CTOR
@@ -39,13 +58,13 @@ public class MapLevel
     public MapLevel(QuestConfigurationRoot config) : base()
     {
         _config = config;
-        FloodWithThing(this.Floor);
+        FloodWithMapSquare(this.FloorMapSquare);
     }
 
     public MapLevel(QuestConfigurationRoot config, MapSquare square) : base()
     {
         _config = config;
-
+        FloodWithMapSquare(square);
     }
 
     /// <summary>
@@ -64,36 +83,31 @@ public class MapLevel
         if (!File.Exists(mapFilename)) throw new FileNotFoundException($"Map file '{mapFilename}' not found.");
 
         using var sr = new StreamReader(mapFilename);
-        int y = 0;
-        while (!sr.EndOfStream && y < this.Height)
+        int row = 0;
+        while (!sr.EndOfStream && row < MapLevel.MapRowsDefault)
         {
             var line = sr.ReadLine();
             if (line == null) continue;
             var entries = line.Split(',', StringSplitOptions.RemoveEmptyEntries);
-            for (int x = 0; x < entries.Length && x < this.Width; x++)
+            for (int col = 0; col < entries.Length && col < MapLevel.MapColsDefault; col++)
             {
-                if (int.TryParse(entries[x], out int squareId))
+                if (int.TryParse(entries[col], out int squareId))
                 {
                     var sq = _config.GetThingById(squareId);
-                    this.Squares[x, y] = new MapSquare
+                    this.Squares[row, col] = new MapSquare
                     {
                         Id = squareId,
-                        Unicode = sq != null && !string.IsNullOrEmpty(sq.Unicode) ? sq.Unicode[0] : ' ',
+                        Unicode = sq != null && !string.IsNullOrEmpty(sq.Unicode) ? char.Parse(sq.Unicode) : char.Parse(MapSquare.SPACE),
                         Visible = false
                     };
                 }
                 else
                 {
                     var floor = _config.GetThingByName("floor");
-                    this.Squares[x, y] = new MapSquare
-                    {
-                        Id = floor.Id,
-                        Unicode = floor.Unicode[0],
-                        Visible = false
-                    };
+                    this.Squares[row, col] = new MapSquare(floor.Id, floor.Unicode, false);
                 }
             }
-            y++;
+            row++;
         }
     }
 
@@ -104,9 +118,9 @@ public class MapLevel
         var floor = _config.GetThingByName("floor");
 
         using StreamWriter sw = new(mapFilename);
-        for (int y = 0; y < this.Height; y++)
+        for (int x = 0; x < MapLevel.MapRowsDefault; x++)
         {
-            for (int x = 0; x < this.Width; x++)
+            for (int y = 0; y < MapLevel.MapColsDefault; y++)
             {
                 MapSquare square = this.Squares[x, y];
                 if (square.Id >= 0 && square.Id <= 30)
@@ -125,11 +139,6 @@ public class MapLevel
 
     #endregion
 
-    #region "Fields"
-    public int Width { get; set; } = MapColsDefault;
-    public int Height { get; set; } = MapRowsDefault;
-    public MapSquare[,] Squares { get; set; } = new MapSquare[MapColsDefault, MapRowsDefault];
-    #endregion
 
     #region "Delegates and Events"
     public delegate void MapLevelIlluminateEventHandler(object sender, MapIlluminateEventArgs e);
@@ -145,16 +154,16 @@ public class MapLevel
 
     #region "Methods"
     /// <summary>
-    /// Flood entire map with Thing
+    /// Flood entire map with MapSquare
     /// </summary>
-    /// <param name="t">Thing</param>
-    public void FloodWithThing(Thing t)
+    /// <param name="t">MapSquare</param>
+    public void FloodWithMapSquare(MapSquare t)
     {
-        for (int y = 0; y < this.Height; y++)
+        for (int x = 0; x < MapLevel.MapRowsDefault; x++)
         {
-            for (int x = 0; x < this.Width; x++)
+            for (int y = 0; y < MapLevel.MapColsDefault; y++)
             {
-                Squares[x, y] = new MapSquare(t.Id, t.Unicode);
+                Squares[x, y] = t;
             }
         }
     }

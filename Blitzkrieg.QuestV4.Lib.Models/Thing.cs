@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Blitzkrieg.QuestV4.Lib.Models
 {
@@ -44,7 +38,7 @@ namespace Blitzkrieg.QuestV4.Lib.Models
         /// <returns></returns>
         public override string ToString()
         {
-            return $"{Id}: {Name} (U+{Unicode}) Kind={Kind}";
+            return $"{Id}: {Name} U+{Unicode} Kind={Kind}";
         }
 
     }

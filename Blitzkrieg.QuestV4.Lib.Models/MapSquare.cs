@@ -8,6 +8,7 @@
         public char Unicode = ' ';
         public bool Visible = false;
         public int Id = 0;
+        public const string SPACE = " ";
 
         /// <summary>
         /// CTOR
@@ -34,7 +35,7 @@
         {
             {
                 this.Id = id;
-                Unicode = string.IsNullOrEmpty(unicode) ? ' ' : unicode[0];
+                Unicode = string.IsNullOrEmpty(unicode) ? char.Parse(SPACE) : char.Parse(unicode);
                 this.Visible = visible;
             }
         }

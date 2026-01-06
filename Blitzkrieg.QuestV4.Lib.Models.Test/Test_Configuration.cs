@@ -200,6 +200,16 @@ public sealed class Test_Configuration
     }
 
     [TestMethod]
+    public void Unicode_List()
+    {
+        for (int i = 32; i < 9999; i++)
+        {
+            char u = Convert.ToChar(i);
+            TestContext.WriteLine($"{i}, {u}");
+        }
+    }
+
+    [TestMethod]
     public void Monster_HitPoints()
     {
         var hp = Monster.HitPointsAdjusted(3, 10, 1.1);

@@ -35,33 +35,28 @@ public class Test_Map
         string testMapFilename = "./test_map.csv";
 
         // Arrange
-        var mapLevel = new MapLevel(QuestConfiguration);
         var floor = QuestConfiguration.GetThingByName("floor");
-        for (int y = 0; y < mapLevel.Height; y++)
-        {
-            for (int x = 0; x < mapLevel.Width; x++)
-            {
-                mapLevel.Squares[x, y] = new MapSquare(floor.Id, floor.Unicode[0]);
-            }
-        }
+        var floorSquare = new MapSquare(floor.Id, floor.Unicode, false);
+        var mapLevel = new MapLevel(QuestConfiguration, floorSquare);
+
         // Act
         mapLevel.ToFile(testMapFilename);
+
         // Assert
         Assert.IsTrue(File.Exists(testMapFilename), "Map file was not created.");
 
-        // ---------
+        // Round Trip
 
-        mapLevel = new MapLevel(QuestConfiguration);
         mapLevel.FromFile(testMapFilename);
 
         // Assert
-        Assert.AreEqual(120, mapLevel.Width, "Map width mismatch after round trip.");
-        Assert.AreEqual(40, mapLevel.Height, "Map height mismatch after round trip.");
-        for (int y = 0; y < mapLevel.Height; y++)
+        for (int x = 0; x < MapLevel.MapRowsDefault; x++)
         {
-            for (int x = 0; x < mapLevel.Width; x++)
+            for (int y = 0; y < MapLevel.MapColsDefault; y++)
             {
-                Assert.AreEqual(floor.Id, mapLevel.Squares[x, y].Id, $"Map square Id mismatch at ({x},{y}) after round trip.");
+                {
+                    Assert.AreEqual(floor.Id, mapLevel.Squares[x, y].Id, $"Map square Id mismatch at ({x},{y}) after round trip.");
+                }
             }
         }
     }

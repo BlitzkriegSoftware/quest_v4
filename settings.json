@@ -538,7 +538,7 @@
     {
       "Id": 0,
       "name": "empty",
-      "unicode": " ",
+      "unicode": "\u0032",
       "kind": 0
     },
     {
@@ -610,7 +610,7 @@
     {
       "id": 12,
       "name": "water",
-      "unicode": "\u1f4a7",
+      "unicode": "\u9618",
       "kind": 0
     },
     {
@@ -622,7 +622,7 @@
     {
       "id": 20,
       "name": "trap",
-      "unicode": "\u1FAA4",
+      "unicode": "\u9587",
       "kind": 2
     },
     {
@@ -634,31 +634,31 @@
     {
       "id": 40,
       "name": "potion",
-      "unicode": "\u1F376",
+      "unicode": "\u1364",
       "kind": 4
     },
     {
       "id": 41,
       "name": "scroll",
-      "unicode": "\u1F4Dc",
+      "unicode": "\u2038",
       "kind": 4
     },
     {
       "id": 42,
       "name": "gold",
-      "unicode": "\u1f71b",
+      "unicode": "\u0036",
       "kind": 4
     },
     {
       "id": 43,
       "name": "jewel",
-      "unicode": "\u1F48e",
+      "unicode": "\u8900",
       "kind": 4
     },
     {
       "id": 88,
       "name": "hero",
-      "unicode": "\u1F9B8",
+      "unicode": "\u9977",
       "kind": 888
     }
   ]
