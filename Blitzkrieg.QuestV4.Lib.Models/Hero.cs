@@ -7,7 +7,7 @@ namespace Blitzkrieg.QuestV4.Lib.Models;
 /// </summary>
 public class Hero
 {
-    #region "Constants"
+    #region "Constants, Fields, Properties"
     private const double HP_EXP_BASE = 1.1;
     private const double MANA_EXP_BASE = 1.4;
     private const double ST_BONUS = 1.1;
@@ -31,6 +31,15 @@ public class Hero
         new() { Id =  42, Name = "gold", Quantity = 10},
         new() { Id =  43, Name = "jewel", Quantity = 1},
     ];
+    private List<EventItem> _events;
+    public List<EventItem> Events
+    {
+        get
+        {
+            if (_events == null) _events = new List<EventItem>();
+            return _events;
+        }
+    }
     #endregion
 
     /// <summary>
@@ -252,7 +261,143 @@ public class Hero
         }
     }
 
+    /// <summary>
+    /// Illuminate 
+    /// </summary>
+    /// <param name="row">(sic)</param>
+    /// <param name="col">(sic)</param>
+    /// <param name="radius">(sic)</param>
+    public void Illuminate(int row, int col, int radius = 1)
+    {
 
+    }
+
+    public void AddUpdateEvent(string name, int kind, int impact, int radius)
+    {
+        EventItem ei = new EventItem(kind, name, impact, radius);
+        var sei = this.Events.Where(i => i.Name == name && i.Kind == kind).FirstOrDefault();
+        if (sei != null)
+        {
+            sei.DurationRemaining += impact;
+        }
+        else
+        {
+            this.Events.Add(ei);
+        }
+    }
+
+    public void DoEvents()
+    {
+        if (this.Events.Count <= 0) return;
+
+        foreach (var e in this.Events)
+        {
+            if (e.DurationRemaining <= 0) continue;
+
+            switch (e.Kind)
+            {
+                case 40: // potion
+
+                    break;
+
+                case 41: // scroll
+
+                    break;
+            }
+            e.DurationRemaining--;
+        }
+
+        this.Events.RemoveAll(i => i.DurationRemaining <= 0);
+
+    }
+
+    /// <summary>
+    /// Use Scroll
+    /// </summary>
+    /// <param name="config">QuestConfigurationRoot</param>
+    /// <param name="name">Scroll name</param>
+    /// <returns>Message</returns>
+    public string UseScroll(QuestConfigurationRoot config, string name, bool addEvent = true)
+    {
+        string result = NOTHING_HAPPENS;
+        var inventoryItem = this.Inventory.FirstOrDefault(i => i.Id == 41 && i.Quantity > 0 && i.Name == name);
+        if (inventoryItem != null)
+        {
+            var scroll = config.Scrolls.FirstOrDefault(i => i.Name == name);
+            if (scroll != null)
+            {
+                inventoryItem.Quantity--;
+                switch (name)
+                {
+                    case "candle":
+                        Illuminate(this.X, this.Y, scroll.Radius);
+                        if (addEvent) AddUpdateEvent(name, 41, scroll.Impact, scroll.Radius);
+                        break;
+                    case "torch":
+                        Illuminate(this.X, this.Y, scroll.Radius);
+                        if (addEvent) AddUpdateEvent(name, 41, scroll.Impact, scroll.Radius);
+                        break;
+                    case "majik-map":
+                        Illuminate(this.X, this.Y, scroll.Radius);
+                        if (addEvent) AddUpdateEvent(name, 41, scroll.Impact, scroll.Radius);
+                        break;
+                    case "heal":
+
+                        if (addEvent) AddUpdateEvent(name, 41, scroll.Impact, 0);
+                        break;
+                    case "heal-all":
+
+                        if (addEvent) AddUpdateEvent(name, 41, scroll.Impact, 0);
+                        break;
+                    case "mana":
+
+                        if (addEvent) AddUpdateEvent(name, 41, scroll.Impact, 0);
+                        break;
+                    case "mana-all":
+
+                        if (addEvent) AddUpdateEvent(name, 41, scroll.Impact, 0);
+                        break;
+                    case "find-gold":
+                        break;
+                    case "find-monster":
+                        break;
+                    case "find-majik":
+                        break;
+                    case "find-trap":
+                        break;
+                    case "find-stair":
+                        break;
+                    case "arrow":
+
+                        if (addEvent) AddUpdateEvent(name, 41, scroll.Impact, 0);
+                        break;
+                    case "bomb":
+                        break;
+                    case "fireball":
+                        break;
+                    case "zap":
+
+                        if (addEvent) AddUpdateEvent(name, 41, scroll.Impact, 0);
+                        break;
+                    case "big-zap":
+                        break;
+                    case "nuke":
+                        break;
+                    case "teleport":
+                        break;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    /// Drink Potion
+    /// </summary>
+    /// <param name="config">QuestConfigurationRoot</param>
+    /// <param name="name">Potion</param>
+    /// <returns>Message</returns>
     public string DrinkPotion(QuestConfigurationRoot config, string name)
     {
         string result = NOTHING_HAPPENS;
