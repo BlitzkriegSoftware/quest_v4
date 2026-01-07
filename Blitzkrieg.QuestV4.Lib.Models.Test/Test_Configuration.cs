@@ -189,7 +189,7 @@ public sealed class Test_Configuration
     }
 
     [TestMethod]
-    public void Things_List__ToString()
+    public void Things_List_ToString()
     {
         foreach (var thing in QuestConfiguration.Things)
         {

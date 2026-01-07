@@ -538,127 +538,127 @@
     {
       "Id": 0,
       "name": "empty",
-      "unicode": "\u0032",
+      "unicode": 32,
       "kind": 0
     },
     {
       "id": 1,
       "name": "horizontal",
-      "unicode": "\u2501",
+      "unicode": 9473,
       "kind": 0
     },
     {
       "id": 2,
       "name": "vertical",
-      "unicode": "\u2503",
+      "unicode": 9475,
       "kind": 0
     },
     {
       "id": 3,
       "name": "down-right",
-      "unicode": "\u250f",
+      "unicode": 9487,
       "kind": 0
     },
     {
       "id": 4,
       "name": "down-left",
-      "unicode": "\u2513",
+      "unicode": 9491,
       "kind": 0
     },
     {
       "id": 5,
       "name": "up-left",
-      "unicode": "\u251b",
+      "unicode": 9499,
       "kind": 0
     },
     {
       "id": 6,
       "name": "up-right",
-      "unicode": "\u2517",
+      "unicode": 9495,
       "kind": 0
     },
     {
       "id": 7,
       "name": "vertical-left",
-      "unicode": "\u252b",
+      "unicode": 9515,
       "kind": 0
     },
     {
       "id": 8,
       "name": "vertical-right",
-      "unicode": "\u2523",
+      "unicode": 9507,
       "kind": 0
     },
     {
       "id": 9,
       "name": "horizontal-down",
-      "unicode": "\u2533",
+      "unicode": 9523,
       "kind": 0
     },
     {
       "id": 10,
       "name": "horizontal-up",
-      "unicode": "\u253b",
+      "unicode": 9531,
       "kind": 0
     },
     {
       "id": 11,
       "name": "cross",
-      "unicode": "\u254b",
+      "unicode": 9547,
       "kind": 0
     },
     {
       "id": 12,
       "name": "water",
-      "unicode": "\u9618",
+      "unicode": 38424,
       "kind": 0
     },
     {
       "id": 13,
       "name": "floor",
-      "unicode": "\u22c5",
+      "unicode": 5867,
       "kind": 1
     },
     {
       "id": 20,
       "name": "trap",
-      "unicode": "\u9587",
+      "unicode": 9747,
       "kind": 2
     },
     {
       "id": 30,
       "name": "stair",
-      "unicode": "\u2261",
+      "unicode": 8801,
       "kind": 3
     },
     {
       "id": 40,
       "name": "potion",
-      "unicode": "\u1364",
+      "unicode": 8478,
       "kind": 4
     },
     {
       "id": 41,
       "name": "scroll",
-      "unicode": "\u2038",
+      "unicode": 5864,
       "kind": 4
     },
     {
       "id": 42,
       "name": "gold",
-      "unicode": "\u0036",
+      "unicode": 36,
       "kind": 4
     },
     {
       "id": 43,
       "name": "jewel",
-      "unicode": "\u8900",
+      "unicode": 4960,
       "kind": 4
     },
     {
       "id": 88,
       "name": "hero",
-      "unicode": "\u9977",
+      "unicode": 9787,
       "kind": 888
     }
   ]

@@ -3,7 +3,6 @@
 namespace Blitzkrieg.QuestV4.Lib.Models
 {
 
-
     /// <summary>
     /// Thing
     /// </summary>
@@ -24,7 +23,7 @@ namespace Blitzkrieg.QuestV4.Lib.Models
         /// Rendered Unicode character
         /// </summary>
         [JsonProperty(nameof(Unicode))]
-        public string Unicode { get; set; }
+        public int Unicode { get; set; }
 
         /// <summary>
         /// Kind code
@@ -38,7 +37,7 @@ namespace Blitzkrieg.QuestV4.Lib.Models
         /// <returns></returns>
         public override string ToString()
         {
-            return $"{Id}: {Name} U+{Unicode} Kind={Kind}";
+            return $"{Id}: {Name} ({Kind}), dec+{Unicode} {Convert.ToChar(Unicode)}";
         }
 
     }

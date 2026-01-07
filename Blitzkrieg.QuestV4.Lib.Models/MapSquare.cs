@@ -31,11 +31,11 @@
         /// <param name="id"></param>
         /// <param name="unicode"></param>
         /// <param name="visible"></param>
-        public MapSquare(int id, string unicode, bool visible = false)
+        public MapSquare(int id, int unicode, bool visible = false)
         {
             {
                 this.Id = id;
-                Unicode = string.IsNullOrEmpty(unicode) ? char.Parse(SPACE) : char.Parse(unicode);
+                Unicode = (unicode == 0) ? char.Parse(SPACE) : Convert.ToChar(unicode);
                 this.Visible = visible;
             }
         }

@@ -97,7 +97,7 @@ public class MapLevel
                     this.Squares[row, col] = new MapSquare
                     {
                         Id = squareId,
-                        Unicode = sq != null && !string.IsNullOrEmpty(sq.Unicode) ? char.Parse(sq.Unicode) : char.Parse(MapSquare.SPACE),
+                        Unicode = sq != null && (sq.Unicode != 0) ? Convert.ToChar(sq.Unicode) : char.Parse(MapSquare.SPACE),
                         Visible = false
                     };
                 }
