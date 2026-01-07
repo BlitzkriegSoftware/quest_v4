@@ -81,33 +81,29 @@ public class MapLevel
     public void FromFile(string mapFilename)
     {
         if (!File.Exists(mapFilename)) throw new FileNotFoundException($"Map file '{mapFilename}' not found.");
-
-        using var sr = new StreamReader(mapFilename);
-        int row = 0;
-        while (!sr.EndOfStream && row < MapLevel.MapRowsDefault)
+        using (var sr = new StreamReader(mapFilename))
         {
-            var line = sr.ReadLine();
-            if (line == null) continue;
-            var entries = line.Split(',', StringSplitOptions.RemoveEmptyEntries);
-            for (int col = 0; col < entries.Length && col < MapLevel.MapColsDefault; col++)
+            int row = 0;
+            while (!sr.EndOfStream && row < MapLevel.MapRowsDefault)
             {
-                if (int.TryParse(entries[col], out int squareId))
+                var line = sr.ReadLine();
+                if (line == null) continue;
+                var entries = line.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                for (int col = 0; col < entries.Length && col < MapLevel.MapColsDefault; col++)
                 {
-                    var sq = _config.GetThingById(squareId);
-                    this.Squares[row, col] = new MapSquare
+                    if (int.TryParse(entries[col], out int squareId))
                     {
-                        Id = squareId,
-                        Unicode = sq != null && (sq.Unicode != 0) ? Convert.ToChar(sq.Unicode) : char.Parse(MapSquare.SPACE),
-                        Visible = false
-                    };
+                        var sq = _config.GetThingById(squareId);
+                        this.Squares[row, col] = new MapSquare(squareId, sq.Unicode, false);
+                    }
+                    else
+                    {
+                        this.Squares[row, col] = this.FloorMapSquare;
+                    }
                 }
-                else
-                {
-                    var floor = _config.GetThingByName("floor");
-                    this.Squares[row, col] = new MapSquare(floor.Id, floor.Unicode, false);
-                }
+                row++;
             }
-            row++;
+            sr.Close();
         }
     }
 
@@ -115,30 +111,30 @@ public class MapLevel
     {
         if (File.Exists(mapFilename)) File.Delete(mapFilename);
 
-        var floor = _config.GetThingByName("floor");
-
-        using StreamWriter sw = new(mapFilename);
-        for (int x = 0; x < MapLevel.MapRowsDefault; x++)
+        using (StreamWriter sw = new(mapFilename))
         {
-            for (int y = 0; y < MapLevel.MapColsDefault; y++)
+            for (int row = 0; row < MapLevel.MapRowsDefault; row++)
             {
-                MapSquare square = this.Squares[x, y];
-                if (square.Id >= 0 && square.Id <= 30)
+                for (int col = 0; col < MapLevel.MapColsDefault; col++)
                 {
-                    sw.Write(square.Id);
+                    MapSquare square = this.Squares[row, col];
+                    if (square.Id >= 0 && square.Id <= 30)
+                    {
+                        sw.Write(square.Id);
+                    }
+                    else
+                    {
+                        sw.Write(this.FloorMapSquare.Id);
+                    }
+                    sw.Write(",");
                 }
-                else
-                {
-                    sw.Write(floor.Id);
-                }
-                sw.Write(",");
+                sw.WriteLine();
             }
-            sw.WriteLine();
+            sw.Close();
         }
     }
 
     #endregion
-
 
     #region "Delegates and Events"
     public delegate void MapLevelIlluminateEventHandler(object sender, MapIlluminateEventArgs e);
@@ -159,11 +155,11 @@ public class MapLevel
     /// <param name="t">MapSquare</param>
     public void FloodWithMapSquare(MapSquare t)
     {
-        for (int x = 0; x < MapLevel.MapRowsDefault; x++)
+        for (int row = 0; row < MapLevel.MapRowsDefault; row++)
         {
-            for (int y = 0; y < MapLevel.MapColsDefault; y++)
+            for (int col = 0; col < MapLevel.MapColsDefault; col++)
             {
-                Squares[x, y] = t;
+                Squares[row, col] = t;
             }
         }
     }

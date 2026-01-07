@@ -16,21 +16,6 @@
         /// <param name="id"></param>
         /// <param name="unicode"></param>
         /// <param name="visible"></param>
-        public MapSquare(int id, char unicode, bool visible = false)
-        {
-            {
-                this.Id = id;
-                this.Unicode = unicode;
-                this.Visible = visible;
-            }
-        }
-
-        /// <summary>
-        /// CTOR
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="unicode"></param>
-        /// <param name="visible"></param>
         public MapSquare(int id, int unicode, bool visible = false)
         {
             {

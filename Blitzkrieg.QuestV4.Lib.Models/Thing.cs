@@ -20,7 +20,7 @@ namespace Blitzkrieg.QuestV4.Lib.Models
         public string Name { get; set; }
 
         /// <summary>
-        /// Rendered Unicode character
+        /// Rendered Unicode character (decimal) must be in Basic Multilingual Plane (BMP)
         /// </summary>
         [JsonProperty(nameof(Unicode))]
         public int Unicode { get; set; }

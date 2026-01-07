@@ -202,6 +202,9 @@ public sealed class Test_Configuration
     [TestMethod]
     public void Unicode_List()
     {
+        // Rendered Unicode character (decimal)
+        // in Basic Multilingual Plane (BMP)
+        // Starting a SPACE (ascii 32)
         for (int i = 32; i < 9999; i++)
         {
             char u = Convert.ToChar(i);
@@ -215,6 +218,9 @@ public sealed class Test_Configuration
         var hp = Monster.HitPointsAdjusted(3, 10, 1.1);
         TestContext.WriteLine($"{hp}");
         Assert.IsGreaterThanOrEqualTo(0, hp);
+        var mnstr = QuestConfiguration.Monsters[0];
+        mnstr.HitPointsRemaing = 30;
+        Assert.AreEqual(30, mnstr.HitPointsRemaing);
     }
 
 
