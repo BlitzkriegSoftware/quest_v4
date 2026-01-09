@@ -23,6 +23,7 @@ public class Hero
     public const int STAT_INITIAL_VALUE = 4;
     public const string NOTHING_HAPPENS = "Nothing happens";
     public readonly string[] STAT_LIST = ["st", "en", "iq"];
+    private readonly int[] EventValidKinds = [40, 41];
     private readonly InventoryItem[] INVENTORY_LIST = [
         new() { Id =  40, Name = "heal", Quantity = 3},
         new() { Id =  40, Name = "mana", Quantity = 3},
@@ -42,6 +43,7 @@ public class Hero
     }
     #endregion
 
+    #region "CTOR"
     /// <summary>
     /// CTOR
     /// </summary>
@@ -59,6 +61,36 @@ public class Hero
         this.Inventory = [.. INVENTORY_LIST];
     }
 
+    #endregion
+
+    #region "Factories"
+
+    /// <summary>
+    /// Factory: Create Hero from SaveGame
+    /// </summary>
+    /// <param name="saveGame">SaveGameRoot</param>
+    /// <returns>Hero</returns>
+    public static Hero FromSaveGame(SaveGameRoot saveGame)
+    {
+        Hero hero = new()
+        {
+            PlayerName = saveGame.PlayerName,
+            Damage = 0,
+            Deaths = saveGame.Deaths,
+            Depth = saveGame.Depth,
+            Experience = saveGame.Experience,
+            Inventory = saveGame.Inventory,
+            Level = saveGame.Level,
+            Stats = saveGame.Stats,
+            X = -1,
+            Y = -1,
+        };
+        return hero;
+    }
+
+    #endregion
+
+    #region "Properties"
     /// <summary>
     /// Player Name
     /// </summary>
@@ -119,6 +151,12 @@ public class Hero
         return Stats[key];
     }
 
+    /// <summary>
+    /// Inventory
+    /// </summary>
+    public List<InventoryItem> Inventory { get; set; }
+
+    #endregion
 
     /// <summary>
     /// Compute hit points
@@ -155,11 +193,6 @@ public class Hero
         }
         return mana;
     }
-
-    /// <summary>
-    /// Inventory
-    /// </summary>
-    public List<InventoryItem> Inventory { get; set; }
 
     /// <summary>
     /// ComputeScore (compute)
@@ -220,29 +253,6 @@ public class Hero
     }
 
     /// <summary>
-    /// Factory: Create Hero from SaveGame
-    /// </summary>
-    /// <param name="saveGame">SaveGameRoot</param>
-    /// <returns>Hero</returns>
-    public static Hero FromSaveGame(SaveGameRoot saveGame)
-    {
-        Hero hero = new()
-        {
-            PlayerName = saveGame.PlayerName,
-            Damage = 0,
-            Deaths = saveGame.Deaths,
-            Depth = saveGame.Depth,
-            Experience = saveGame.Experience,
-            Inventory = saveGame.Inventory,
-            Level = saveGame.Level,
-            Stats = saveGame.Stats,
-            X = -1,
-            Y = -1,
-        };
-        return hero;
-    }
-
-    /// <summary>
     /// Bump a player stat up or down
     /// </summary>
     /// <param name="config">QuestConfigurationRoot</param>
@@ -267,13 +277,75 @@ public class Hero
     /// <param name="row">(sic)</param>
     /// <param name="col">(sic)</param>
     /// <param name="radius">(sic)</param>
-    public void Illuminate(int row, int col, int radius = 1)
+    /// <param name="searchThing">If null all</param>
+    /// <returns>Message</returns>
+    public string Illuminate(int row, int col, int radius = 1, int[] searchThing = null)
     {
+        string msg = NOTHING_HAPPENS;
 
+
+        return msg;
     }
 
-    public void AddUpdateEvent(string name, int kind, int impact, int radius)
+    public string Attack(int row, int col, int impact)
     {
+        string msg = NOTHING_HAPPENS;
+
+
+        return msg;
+    }
+
+    /// <summary>
+    /// Heal
+    /// </summary>
+    /// <param name="healByPercent">heal by percent (as double)</param>
+    /// <returns>Message</returns>
+    public string Heal(double healByPercent)
+    {
+        string msg = NOTHING_HAPPENS;
+        if (this.Damage > 0)
+        {
+            int hp = this.ComputeHitPoints();
+            int healBy = (int)Math.Round(hp * healByPercent, 0) + 1;
+            this.Damage -= healBy;
+            if (this.Damage < 0) this.Damage = 0;
+            msg = $"You are healed by {healByPercent} for {healBy} points leaving damage of {this.Damage}";
+        }
+        return msg;
+    }
+
+    /// <summary>
+    /// Mana
+    /// </summary>
+    /// <param name="manalByPercent">mana by percent (as double)</param>
+    /// <returns>Message</returns>
+    public string Mana(double manalByPercent)
+    {
+        string msg = NOTHING_HAPPENS;
+        if (this.ManaUsed > 0)
+        {
+            int mana = this.ComputeMana();
+            int manaBy = (int)Math.Round(mana * manalByPercent, 0) + 1;
+            this.ManaUsed -= manaBy;
+            if (this.ManaUsed < 0) this.ManaUsed = 0;
+            msg = $"Your mana is refreshed by {manalByPercent} for {manaBy} units leaving mana used of {this.ManaUsed}";
+        }
+        return msg;
+    }
+
+    /// <summary>
+    /// Add update event list
+    /// </summary>
+    /// <param name="kind">EventValidKinds</param>
+    /// <param name="name">(sic)</param>
+    /// <param name="impact">Duration</param>
+    /// <param name="radius">(optional) radius</param>
+    public void AddUpdateEvent(int kind, string name, int impact, int radius = 0)
+    {
+        if (!Array.Exists(EventValidKinds, i => i.Equals(kind))) throw new ArgumentOutOfRangeException(nameof(kind));
+        if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
+        if (impact < 0) throw new ArgumentOutOfRangeException(nameof(impact));
+
         EventItem ei = new EventItem(kind, name, impact, radius);
         var sei = this.Events.Where(i => i.Name == name && i.Kind == kind).FirstOrDefault();
         if (sei != null)
@@ -286,6 +358,9 @@ public class Hero
         }
     }
 
+    /// <summary>
+    /// Do one turns worth of events
+    /// </summary>
     public void DoEvents()
     {
         if (this.Events.Count <= 0) return;
@@ -330,60 +405,70 @@ public class Hero
                 switch (name)
                 {
                     case "candle":
-                        Illuminate(this.X, this.Y, scroll.Radius);
-                        if (addEvent) AddUpdateEvent(name, 41, scroll.Impact, scroll.Radius);
+                        result = Illuminate(this.X, this.Y, scroll.Radius);
+                        if (addEvent) AddUpdateEvent(41, name, scroll.Impact, scroll.Radius);
                         break;
                     case "torch":
-                        Illuminate(this.X, this.Y, scroll.Radius);
-                        if (addEvent) AddUpdateEvent(name, 41, scroll.Impact, scroll.Radius);
+                        result = Illuminate(this.X, this.Y, scroll.Radius);
+                        if (addEvent) AddUpdateEvent(41, name, scroll.Impact, scroll.Radius);
                         break;
                     case "majik-map":
-                        Illuminate(this.X, this.Y, scroll.Radius);
-                        if (addEvent) AddUpdateEvent(name, 41, scroll.Impact, scroll.Radius);
+                        result = Illuminate(this.X, this.Y, scroll.Radius);
+                        if (addEvent) AddUpdateEvent(41, name, scroll.Impact, scroll.Radius);
                         break;
                     case "heal":
-
-                        if (addEvent) AddUpdateEvent(name, 41, scroll.Impact, 0);
+                        result = Heal(0.1);
+                        if (addEvent) AddUpdateEvent(41, name, scroll.Impact, 0);
                         break;
                     case "heal-all":
-
-                        if (addEvent) AddUpdateEvent(name, 41, scroll.Impact, 0);
+                        result = Heal(1.0);
+                        if (addEvent) AddUpdateEvent(41, name, scroll.Impact, 0);
                         break;
                     case "mana":
-
-                        if (addEvent) AddUpdateEvent(name, 41, scroll.Impact, 0);
+                        result = Mana(0.1);
+                        if (addEvent) AddUpdateEvent(41, name, scroll.Impact, 0);
                         break;
                     case "mana-all":
-
-                        if (addEvent) AddUpdateEvent(name, 41, scroll.Impact, 0);
+                        result = Mana(1.0);
+                        if (addEvent) AddUpdateEvent(41, name, scroll.Impact, 0);
                         break;
                     case "find-gold":
+                        result = Illuminate(this.X, this.Y, scroll.Radius, [42, 43]);
                         break;
                     case "find-monster":
+                        result = Illuminate(this.X, this.Y, scroll.Radius, [42, 43]);
                         break;
                     case "find-majik":
+                        result = Illuminate(this.X, this.Y, scroll.Radius, [40, 41]);
                         break;
                     case "find-trap":
+                        result = Illuminate(this.X, this.Y, scroll.Radius, [20]);
                         break;
                     case "find-stair":
+                        result = Illuminate(this.X, this.Y, scroll.Radius, [30]);
                         break;
                     case "arrow":
-
-                        if (addEvent) AddUpdateEvent(name, 41, scroll.Impact, 0);
+                        result = Attack(this.X, this.Y, scroll.Impact);
+                        if (addEvent) AddUpdateEvent(41, name, scroll.Impact, 0);
                         break;
                     case "bomb":
+                        result = Attack(this.X, this.Y, scroll.Impact);
                         break;
                     case "fireball":
+                        result = Attack(this.X, this.Y, scroll.Impact);
                         break;
                     case "zap":
-
-                        if (addEvent) AddUpdateEvent(name, 41, scroll.Impact, 0);
+                        result = Attack(this.X, this.Y, scroll.Impact);
+                        if (addEvent) AddUpdateEvent(41, name, scroll.Impact, 0);
                         break;
                     case "big-zap":
+                        result = Attack(this.X, this.Y, scroll.Impact);
                         break;
                     case "nuke":
+                        result = Attack(this.X, this.Y, scroll.Impact);
                         break;
                     case "teleport":
+                        result = Attack(this.X, this.Y, scroll.Impact);
                         break;
                 }
             }

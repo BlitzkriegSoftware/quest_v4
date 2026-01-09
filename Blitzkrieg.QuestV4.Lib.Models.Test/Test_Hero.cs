@@ -189,4 +189,11 @@ public class Test_Hero
         Assert.AreEqual(Hero.NOTHING_HAPPENS, msg);
     }
 
+    [TestMethod]
+    public void Test_EventItem()
+    {
+        var ei = new EventItem(43, "pond", 3, 1);
+        Assert.IsNotNull(ei);
+    }
+
 }
