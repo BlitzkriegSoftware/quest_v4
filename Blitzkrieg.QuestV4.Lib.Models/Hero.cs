@@ -287,6 +287,13 @@ public class Hero
         return msg;
     }
 
+    /// <summary>
+    /// Attack
+    /// </summary>
+    /// <param name="row">(sic)</param>
+    /// <param name="col">(sic)</param>
+    /// <param name="impact">(sic)</param>
+    /// <returns>Message</returns>
     public string Attack(int row, int col, int impact)
     {
         string msg = NOTHING_HAPPENS;
