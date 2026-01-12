@@ -33,7 +33,7 @@ public class Test_Hero
     {
         var hero = new Hero("Frog");
         Assert.IsNotNull(hero);
-        Assert.IsFalse(string.IsNullOrEmpty(hero.PlayerName));
+        Assert.IsFalse(string.IsNullOrEmpty(hero.Name));
         Assert.IsFalse(string.IsNullOrEmpty(hero.ToString()));
         Assert.IsGreaterThan(0, hero.Level);
         Assert.IsGreaterThan(0, hero.Depth);

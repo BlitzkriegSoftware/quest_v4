@@ -5,8 +5,54 @@ namespace Blitzkrieg.QuestV4.Lib.Models;
 /// <summary>
 /// Hero
 /// </summary>
-public class Hero
+public class Hero : IMapItem
 {
+    #region "IMapItem Implementation"
+    public string Name { get; set; } = "Hero";
+    public int Level { get; set; } = 0;
+    public int X { get; set; } = -1;
+    public int Y { get; set; } = -1;
+    public int Damage { get; set; } = 0;
+    public int ManaUsed { get; set; } = 0;
+
+
+    /// <summary>
+    /// Compute hit points
+    /// </summary>
+    /// <returns></returns>
+    public int ComputeHitPoints()
+    {
+        int hp = 0;
+        foreach (var s in Stats)
+        {
+            switch (s.Key)
+            {
+                case "st": hp += (int)(s.Value * ST_BONUS); break;
+                case "en": hp += (int)(s.Value * EN_BONUS); break;
+            }
+        }
+
+        hp = (int)(hp * Math.Pow(HP_EXP_BASE, this.Level));
+
+        return hp;
+    }
+
+    /// <summary>
+    /// Compute Mana
+    /// </summary>
+    /// <returns>Computed Mana</returns>
+    public int ComputeMana()
+    {
+        int mana = MANA_BASE;
+        var iq = this.Stats.FirstOrDefault(i => i.Key == "iq");
+        if (iq.Value > 0)
+        {
+            mana += mana + (int)(iq.Value * Math.Pow(MANA_EXP_BASE, this.Level));
+        }
+        return mana;
+    }
+    #endregion
+
     #region "Constants, Fields, Properties"
     private const double HP_EXP_BASE = 1.1;
     private const double MANA_EXP_BASE = 1.4;
@@ -55,7 +101,7 @@ public class Hero
     /// <param name="name">Player Name</param>
     public Hero(string name)
     {
-        this.PlayerName = name;
+        this.Name = name;
         this.Stats = [];
         foreach (string stat in STAT_LIST) this.Stats.Add(stat, STAT_INITIAL_VALUE);
         this.Inventory = [.. INVENTORY_LIST];
@@ -74,7 +120,7 @@ public class Hero
     {
         Hero hero = new()
         {
-            PlayerName = saveGame.PlayerName,
+            Name = saveGame.PlayerName,
             Damage = 0,
             Deaths = saveGame.Deaths,
             Depth = saveGame.Depth,
@@ -91,40 +137,11 @@ public class Hero
     #endregion
 
     #region "Properties"
-    /// <summary>
-    /// Player Name
-    /// </summary>
-    public string PlayerName { get; set; } = "Hero";
-
-    /// <summary>
-    /// Player Level
-    /// </summary>
-    public int Level { get; set; } = 1;
 
     /// <summary>
     /// Dungeon Depth
     /// </summary>
     public int Depth { get; set; } = 1;
-
-    /// <summary>
-    /// Place in row
-    /// </summary>
-    public int X { get; set; } = -1;
-
-    /// <summary>
-    /// Place in col
-    /// </summary>
-    public int Y { get; set; } = -1;
-
-    /// <summary>
-    /// Computed Damage
-    /// </summary>
-    public int Damage { get; set; } = 0;
-
-    /// <summary>
-    /// Manu Used
-    /// </summary>
-    public int ManaUsed { get; set; } = 0;
 
     /// <summary>
     /// How many times have we died
@@ -158,41 +175,6 @@ public class Hero
 
     #endregion
 
-    /// <summary>
-    /// Compute hit points
-    /// </summary>
-    /// <returns></returns>
-    public int ComputeHitPoints()
-    {
-        int hp = 0;
-        foreach (var s in Stats)
-        {
-            switch (s.Key)
-            {
-                case "st": hp += (int)(s.Value * ST_BONUS); break;
-                case "en": hp += (int)(s.Value * EN_BONUS); break;
-            }
-        }
-
-        hp = (int)(hp * Math.Pow(HP_EXP_BASE, this.Level));
-
-        return hp;
-    }
-
-    /// <summary>
-    /// Compute Mana
-    /// </summary>
-    /// <returns>Computed Mana</returns>
-    public int ComputeMana()
-    {
-        int mana = MANA_BASE;
-        var iq = this.Stats.FirstOrDefault(i => i.Key == "iq");
-        if (iq.Value > 0)
-        {
-            mana += mana + (int)(iq.Value * Math.Pow(MANA_EXP_BASE, this.Level));
-        }
-        return mana;
-    }
 
     /// <summary>
     /// ComputeScore (compute)
@@ -206,7 +188,7 @@ public class Hero
         BigInteger grand = 0;
         var l = new List<string>
         {
-            $"Player: {PlayerName}"
+            $"Player: {Name}"
         };
 
         score = this.Level * SCORE_PER_LEVEL;
@@ -538,7 +520,7 @@ public class Hero
     /// <returns></returns>
     public bool IsValid()
     {
-        return !string.IsNullOrWhiteSpace(this.PlayerName) &&
+        return !string.IsNullOrWhiteSpace(this.Name) &&
             this.Stats != null && this.Stats.Count > 0 &&
             this.Inventory != null && this.Inventory.Count > 0 &&
             this.Level > 0 &&
@@ -563,7 +545,7 @@ public class Hero
     /// <returns></returns>
     public override string ToString()
     {
-        return $"{PlayerName} Lvl:{Level} XP:{Experience}, HP: {ComputeHitPoints()}";
+        return $"{Name} Lvl:{Level} XP:{Experience}, HP: {ComputeHitPoints()}";
     }
 
 }
