@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Blitzkrieg.QuestV4.Game.exe (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Blitzkrieg.QuestV4.Game.exe (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
