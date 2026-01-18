@@ -12,8 +12,9 @@
     <Window.SystemBackdrop>
         <MicaBackdrop />
     </Window.SystemBackdrop>
+    <Viewbox Stretch="Uniform">
+        <Grid Name="grdBoard" >
 
-    <Grid>
-
-    </Grid>
+        </Grid>
+    </Viewbox>
 </Window>

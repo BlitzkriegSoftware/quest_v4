@@ -31,12 +31,16 @@
 		<PackageReference Update="MSTest.TestAdapter" Version="4.0.2" />
 		<PackageReference Update="MSTest.TestFramework" Version="4.0.2" />
 		<PackageReference Include="coverlet.collector" Version="6.0.4" />
-		<PackageReference Include="Microsoft.CodeCoverage" Version="17.14.1" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+		<PackageReference Include="Microsoft.CodeCoverage" Version="18.0.1" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Blitzkrieg.QuestV4.Lib.Models\Blitzkrieg.QuestV4.Lib.Models.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="Microsoft.Testing.Extensions.CodeCoverage" Version="18.3.2" />
 	</ItemGroup>
 
 </Project>
